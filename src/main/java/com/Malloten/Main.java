@@ -8,8 +8,14 @@ public class Main extends Canvas implements Runnable {
     private Thread thread;
     private boolean running = false;
 
+    private Handler handler;
+
     public Main() {
         new Window(this);
+
+        handler = new Handler();
+
+        handler.addObject(new Player(32, 32));
 
         start();
     }
@@ -74,7 +80,16 @@ public class Main extends Canvas implements Runnable {
 
         Graphics g = bs.getDrawGraphics();
 
+        g.setColor(Color.black);
+        g.fillRect(0, 0, 640, 480);
+
+        handler.render(g);
+
         g.dispose();
         bs.show();
+    }
+
+    public void addObject(GameObject object) {
+
     }
 }

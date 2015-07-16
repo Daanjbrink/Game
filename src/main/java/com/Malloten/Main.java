@@ -2,13 +2,13 @@ package com.Malloten;
 
 import java.awt.*;
 
-public class Main extends Canvas{
+public class Main extends Canvas {
 
-    public Main(){
-
+    public Main() {
+        new Window(this);
     }
 
-    public static void main(String[] args){
-
+    public static void main(String[] args) {
+        new Main();
     }
 }

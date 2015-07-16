@@ -9,7 +9,8 @@ public class Player extends GameObject {
     }
 
     public void tick() {
-
+        x += spdX;
+        y += spdY;
     }
 
     public void render(Graphics g) {

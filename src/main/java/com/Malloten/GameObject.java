@@ -49,4 +49,8 @@ public abstract class GameObject {
     public void setSpdY(int spdY) {
         this.spdY = spdY;
     }
+
+    public ID getID() {
+        return id;
+    }
 }

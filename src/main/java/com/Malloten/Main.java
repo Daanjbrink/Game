@@ -15,6 +15,8 @@ public class Main extends Canvas implements Runnable {
 
         handler = new Handler();
 
+        this.addKeyListener(new KeyInput(handler));
+
         handler.addObject(new Player(32, 32));
 
         start();
@@ -68,7 +70,7 @@ public class Main extends Canvas implements Runnable {
     }
 
     private void tick() {
-
+        handler.tick();
     }
 
     private void render() {

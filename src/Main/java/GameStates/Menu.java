@@ -3,6 +3,7 @@ package GameStates;
 import Engine.Main;
 import Engine.Object;
 import Engine.ObjectHandler;
+import Objects.But_Settings;
 import Objects.But_StartGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
@@ -25,6 +26,7 @@ public class Menu extends BasicGameState {
 
         // Add buttons
         handler.addObject(new But_StartGame(8, 264));
+        handler.addObject(new But_Settings(8, 300));
     }
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {

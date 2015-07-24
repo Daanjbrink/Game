@@ -25,6 +25,7 @@ public class Main extends StateBasedGame {
             appGc.setShowFPS(false);
             appGc.setVSync(true);
             appGc.setTargetFrameRate(60);
+            appGc.setIcon("src/Main/resources/Sprites/Other/Icon.png");
             appGc.start();
         } catch (Exception e) {
 

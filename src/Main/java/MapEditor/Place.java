@@ -54,13 +54,19 @@ public class Place {
 
         if (e.getButton() == MouseEvent.BUTTON3) {
             if (handler.State == 0) {
-                //code for remove objects
+                if (PlaceFree(mX, mY)) return;
+
+                for (int i = 0; i < handler.objects.size(); i++) {
+                    Object tmp = handler.objects.get(i);
+                    if (tmp.getX() == mX && tmp.getY() == mY) {
+                        handler.removeObject(tmp.getID());
+                    }
+                }
             } else if (handler.State == 1) {
                 handler.State = 0;
-                handler.type = null;
             } else if (handler.State == 2) {
-                handler.Selected = -1;
                 handler.State = 0;
+                handler.removeObject(handler.Selected);
             }
         }
     }

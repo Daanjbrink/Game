@@ -33,6 +33,11 @@ public class ObjectHandler {
     }
 
     public void removeObject(int id) {
-        objects.remove(objects.get(id));
+        for (int i = 0; i < objects.size(); i++) {
+            Object tmp = objects.get(i);
+            if (tmp.getID() == id) {
+                objects.remove(tmp);
+            }
+        }
     }
 }

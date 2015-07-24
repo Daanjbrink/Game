@@ -19,8 +19,8 @@ public class Main extends Canvas implements Runnable {
         handler = new ObjectHandler();
         place = new Place(handler);
 
-        this.addMouseListener(new Mouse(handler, place));
-        this.addMouseMotionListener(new Mouse(handler, place));
+        this.addMouseListener(new Mouse(place));
+        this.addMouseMotionListener(new Mouse(place));
         this.addKeyListener(new Keyboard(handler));
 
         this.createBufferStrategy(2);

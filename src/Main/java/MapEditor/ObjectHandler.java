@@ -11,6 +11,7 @@ public class ObjectHandler {
     //1=new block
     //2=move
     int State = 0;
+    int Selected = -1;
     Types type = Types.Wall;
 
     public void render(Graphics g) {
@@ -22,7 +23,7 @@ public class ObjectHandler {
 
     public void addObject(Object obj) {
         objects.add(obj);
-        obj.setID(objects.size());
+        obj.setID(objects.size() - 1);
     }
 
     public void removeObject(int id) {

@@ -27,6 +27,8 @@ public class Window extends Canvas implements ActionListener {
         Export.addActionListener(this);
         menu.add(Export);
 
+        bar.add(menu);
+
         JFrame frame = new JFrame("MapEditor");
         frame.setPreferredSize(new Dimension(main.width, main.height));
         frame.setMaximumSize(new Dimension(main.width, main.height));
@@ -35,8 +37,8 @@ public class Window extends Canvas implements ActionListener {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setLocationRelativeTo(null);
         frame.setResizable(false);
-        frame.add(bar);
         frame.add(main);
+        frame.add(bar, BorderLayout.NORTH);
         frame.setVisible(true);
     }
 

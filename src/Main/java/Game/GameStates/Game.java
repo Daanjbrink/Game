@@ -30,7 +30,7 @@ public class Game extends BasicGameState {
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         for (int i = 0; i < handler.objects.size(); i++) {
-            Game.Engine.Object tmp = handler.objects.get(i);
+            Object tmp = handler.objects.get(i);
             tmp.render(g);
         }
     }

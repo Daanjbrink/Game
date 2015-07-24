@@ -7,11 +7,21 @@ public class Main extends Canvas implements Runnable {
 
     public int width, height;
 
+    private ObjectHandler handler;
+    private Place place;
+
     public Main(int width, int height) {
         this.width = width;
         this.height = height;
 
         new Window(this);
+
+        handler = new ObjectHandler();
+        place = new Place(handler);
+
+        this.addMouseListener(new Mouse(handler, place));
+        this.addMouseMotionListener(new Mouse(handler, place));
+        this.addKeyListener(new Keyboard(handler));
 
         this.createBufferStrategy(2);
 
@@ -32,6 +42,12 @@ public class Main extends Canvas implements Runnable {
         BufferStrategy bs = this.getBufferStrategy();
 
         Graphics g = bs.getDrawGraphics();
+
+        g.setColor(Color.white);
+        g.fillRect(0, 0, width, height);
+
+        handler.render(g);
+        place.render(g);
 
         g.setColor(Color.BLACK);
         int x, y;

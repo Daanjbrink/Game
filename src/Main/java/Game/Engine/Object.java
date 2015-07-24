@@ -1,4 +1,4 @@
-package Engine;
+package Game.Engine;
 
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

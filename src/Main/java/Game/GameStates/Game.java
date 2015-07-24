@@ -1,8 +1,8 @@
-package GameStates;
+package Game.GameStates;
 
-import Engine.Main;
-import Engine.Object;
-import Engine.ObjectHandler;
+import Game.Engine.Main;
+import Game.Engine.Object;
+import Game.Engine.ObjectHandler;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -30,7 +30,7 @@ public class Game extends BasicGameState {
 
     public void render(GameContainer container, StateBasedGame game, Graphics g) throws SlickException {
         for (int i = 0; i < handler.objects.size(); i++) {
-            Engine.Object tmp = handler.objects.get(i);
+            Game.Engine.Object tmp = handler.objects.get(i);
             tmp.render(g);
         }
     }

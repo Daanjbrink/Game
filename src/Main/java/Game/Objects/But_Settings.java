@@ -1,6 +1,6 @@
-package Objects;
+package Game.Objects;
 
-import Engine.Object;
+import Game.Engine.Object;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 

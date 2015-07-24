@@ -1,8 +1,8 @@
-package GameStates;
+package Game.GameStates;
 
-import Engine.Main;
-import Engine.Object;
-import Engine.ObjectHandler;
+import Game.Engine.Main;
+import Game.Engine.Object;
+import Game.Engine.ObjectHandler;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;

@@ -1,8 +1,8 @@
-package Engine;
+package Game.Engine;
 
-import GameStates.Game;
-import GameStates.Loading;
-import GameStates.Menu;
+import Game.GameStates.Game;
+import Game.GameStates.Loading;
+import Game.GameStates.Menu;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;

@@ -1,6 +1,6 @@
-package GameStates;
+package Game.GameStates;
 
-import Engine.Main;
+import Game.Engine.Main;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;

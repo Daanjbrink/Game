@@ -1,17 +1,17 @@
-package Objects;
+package Game.Objects;
 
-import Engine.Object;
+import Game.Engine.Object;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 
-public class But_StartGame extends Object {
+public class But_Exit extends Object {
 
-    public But_StartGame(int x, int y) {
+    public But_Exit(int x, int y) {
         this.x = x;
         this.y = y;
 
         try {
-            this.img = new Image("src/Main/resources/Sprites/Text/Play.png");
+            this.img = new Image("src/Main/resources/Sprites/Text/Exit.png");
             this.width = img.getWidth();
             this.height = img.getHeight();
         } catch (Exception e) {

@@ -1,11 +1,11 @@
-package GameStates;
+package Game.GameStates;
 
-import Engine.Main;
-import Engine.Object;
-import Engine.ObjectHandler;
-import Objects.But_Exit;
-import Objects.But_Settings;
-import Objects.But_StartGame;
+import Game.Engine.Main;
+import Game.Engine.Object;
+import Game.Engine.ObjectHandler;
+import Game.Objects.But_Exit;
+import Game.Objects.But_Settings;
+import Game.Objects.But_StartGame;
 import org.newdawn.slick.*;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;

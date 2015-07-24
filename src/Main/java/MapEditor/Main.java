@@ -34,8 +34,10 @@ public class Main extends Canvas implements Runnable {
 
     public void run() {
         this.requestFocus();
-        while (true)
+        while (true){
+            Thread.sleep(3);
             render();
+        }
     }
 
     public void render() {

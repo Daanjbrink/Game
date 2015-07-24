@@ -34,19 +34,19 @@ public class Place {
                     if (tmp.getX() == mX && tmp.getY() == mY) {
                         handler.Selected = tmp.getID();
                         handler.State = 2;
-                        System.out.println("Picked up");
                     }
                 }
             } else if (handler.State == 1) {
-                if (!PlaceFree(mX, mY, false)) return;
+                if (!PlaceFree(mX, mY)) return;
                 switch (handler.type) {
                     case Wall:
+                        handler.area[mX][mY] = true;
                         handler.addObject(new Wall(mX, mY));
                         break;
                 }
             } else if (handler.State == 2) {
-                if (!PlaceFree(mX, mY, true)) return;
-                System.out.println("Placed");
+                if (!PlaceFree(mX, mY)) return;
+                handler.area[mX][mY] = true;
                 handler.Selected = -1;
                 handler.State = 0;
             }
@@ -56,8 +56,8 @@ public class Place {
             if (handler.State == 0) {
                 //code for remove objects
             } else if (handler.State == 1) {
-                handler.type = null;
                 handler.State = 0;
+                handler.type = null;
             } else if (handler.State == 2) {
                 handler.Selected = -1;
                 handler.State = 0;
@@ -65,30 +65,13 @@ public class Place {
         }
     }
 
-    public boolean PlaceFree(int x, int y, boolean move) {
-        if (!move) {
-            for (int i = 0; i < handler.objects.size(); i++) {
-                Object tmp = handler.objects.get(i);
-                if (tmp.getX() == x && tmp.getY() == y) {
-                    return false;
-                }
-            }
-            return true;
-        } else {
-            for (int i = 0; i < handler.objects.size(); i++) {
-                Object tmp = handler.objects.get(i);
-                if (tmp.getX() == x && tmp.getY() == y) {
-                    if (tmp.getID() == handler.Selected) {
-                        System.out.println("place free move return true aka free");
-                        return true;
-                    } else {
-                        System.out.println("place free move return false aka occu");
-                        return false;
-                    }
-                }
-            }
-            return true;
+    public boolean PlaceFree(int x, int y) {
+        try {
+            return !handler.area[x][y];
+        } catch (Exception e) {
+            e.printStackTrace();
         }
+        return false;
     }
 
     public void render(Graphics g) {

@@ -1,5 +1,7 @@
 package MapEditor;
 
+import Game.Engine.Object;
+
 import java.awt.*;
 import java.util.LinkedList;
 
@@ -23,7 +25,9 @@ public class ObjectHandler {
     public void render(Graphics g) {
         for (int i = 0; i < objects.size(); i++) {
             Object tmp = objects.get(i);
-            tmp.render(g);
+
+            /*Graphics2D g2d = (Graphics2D) g;
+            g2d.drawImage(tmp.get)*/
         }
     }
 

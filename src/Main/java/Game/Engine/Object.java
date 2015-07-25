@@ -52,4 +52,13 @@ public abstract class Object {
         return this.height;
     }
 
+    public int getID() {
+        return this.id;
+
+    }
+
+    public void setID(int id) {
+        this.id = id;
+    }
+
 }

@@ -7,7 +7,11 @@ import java.awt.event.ActionListener;
 
 public class Window extends Canvas implements ActionListener {
 
+    private Main main;
+
     public Window(Main main) {
+        this.main = main;
+
         JMenuBar bar = new JMenuBar();
 
         JMenu menu = new JMenu("File");
@@ -43,6 +47,12 @@ public class Window extends Canvas implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-
+        if (e.getActionCommand() == "New...") {
+            main.New();
+        } else if (e.getActionCommand() == "Import") {
+            main.Import();
+        } else if (e.getActionCommand() == "Export") {
+            main.Export();
+        }
     }
 }

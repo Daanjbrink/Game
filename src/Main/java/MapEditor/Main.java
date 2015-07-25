@@ -1,7 +1,10 @@
 package MapEditor;
 
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
+import java.io.File;
+import java.util.ArrayList;
 
 public class Main extends Canvas implements Runnable {
 
@@ -29,7 +32,11 @@ public class Main extends Canvas implements Runnable {
     }
 
     public static void main(String[] args) {
-        new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+        try {
+            new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+        } catch (Exception e) {
+            new Main(640, 480);
+        }
     }
 
     public void run() {
@@ -60,5 +67,36 @@ public class Main extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
+    }
+
+    public void New() {
+        String width = JOptionPane.showInputDialog("Width");
+        String height = JOptionPane.showInputDialog("Height");
+
+        try {
+            String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
+            File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
+            if (!currentJar.getName().endsWith(".jar")) return;
+            ArrayList<String> command = new ArrayList<String>();
+            command.add(javaBin);
+            command.add("-jar");
+            command.add(currentJar.getPath());
+            command.add(width);
+            command.add(height);
+
+            ProcessBuilder builder = new ProcessBuilder(command);
+            builder.start();
+            System.exit(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void Import() {
+
+    }
+
+    public void Export() {
+
     }
 }

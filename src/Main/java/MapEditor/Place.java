@@ -1,6 +1,7 @@
 package MapEditor;
 
-import MapEditor.Objects.Wall;
+import Game.Engine.Object;
+import Game.Objects.Wall;
 
 import javax.imageio.ImageIO;
 import java.awt.*;

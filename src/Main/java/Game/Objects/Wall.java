@@ -20,7 +20,7 @@ public class Wall extends Object {
     }
 
     public void render(Graphics g) {
-
+        g.drawImage(img, x - 16, y - 16);
     }
 
     public void update() {

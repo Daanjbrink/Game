@@ -2,11 +2,8 @@ package MapEditor;
 
 import Game.Engine.Object;
 import Game.Objects.Wall;
-
-import javax.imageio.ImageIO;
-import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.io.File;
+import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Image;
 
 public class Place {
 
@@ -22,18 +19,22 @@ public class Place {
         this.mY = (int) Math.floor(y / 32) * 32 + 16;
 
         if (handler.State == 2) {
-            handler.objects.get(handler.Selected).setX(mX);
-            handler.objects.get(handler.Selected).setY(mY);
+            handler.Selected.setX(mX);
+            handler.Selected.setY(mY);
         }
     }
 
-    public void click(MouseEvent e) {
-        if (e.getButton() == MouseEvent.BUTTON1) {
+    public void click(int button) {
+        //1 = left mouse button
+        //2 = middle mouse button
+        //3 = right mouse button
+        if (button == 1) {
             if (handler.State == 0) {
                 for (int i = 0; i < handler.objects.size(); i++) {
                     Object tmp = handler.objects.get(i);
                     if (tmp.getX() == mX && tmp.getY() == mY) {
-                        handler.Selected = tmp.getID();
+                        handler.Selected = tmp;
+                        handler.area[mX][mY] = false;
                         handler.State = 2;
                     }
                 }
@@ -48,19 +49,30 @@ public class Place {
             } else if (handler.State == 2) {
                 if (!PlaceFree(mX, mY)) return;
                 handler.area[mX][mY] = true;
-                handler.Selected = -1;
+                handler.Selected = null;
                 handler.State = 0;
             }
         }
 
-        if (e.getButton() == MouseEvent.BUTTON3) {
+        if (button == 2) {
             if (handler.State == 0) {
-                if (PlaceFree(mX, mY)) return;
-
                 for (int i = 0; i < handler.objects.size(); i++) {
                     Object tmp = handler.objects.get(i);
                     if (tmp.getX() == mX && tmp.getY() == mY) {
-                        handler.removeObject(tmp.getID());
+                        System.out.println("Selected object id: " + tmp.getID());
+                    }
+                }
+            }
+        }
+
+        if (button == 3) {
+            if (handler.State == 0) {
+                if (PlaceFree(mX, mY)) return;
+                for (int i = 0; i < handler.objects.size(); i++) {
+                    Object tmp = handler.objects.get(i);
+                    if (tmp.getX() == mX && tmp.getY() == mY) {
+                        handler.removeObject(tmp);
+                        handler.area[mX][mY] = false;
                     }
                 }
             } else if (handler.State == 1) {
@@ -88,9 +100,8 @@ public class Place {
             switch (handler.type) {
                 case Wall:
                     try {
-                        Graphics2D g2d = (Graphics2D) g;
-                        Image img = ImageIO.read(new File("src/Main/resources/Sprites/Wall/Wall 1.png"));
-                        g2d.drawImage(img, mX - 16, mY - 16, null);
+                        Image img = new Image("src/Main/resources/Sprites/Wall/Wall 1.png");
+                        g.drawImage(img, mX - 16, mY - 16, null);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -98,5 +109,4 @@ public class Place {
             }
         }
     }
-
 }

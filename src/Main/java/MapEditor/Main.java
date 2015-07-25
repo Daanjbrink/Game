@@ -1,102 +1,86 @@
 package MapEditor;
 
-import javax.swing.*;
-import java.awt.*;
-import java.awt.image.BufferStrategy;
-import java.io.File;
-import java.util.ArrayList;
+import org.newdawn.slick.*;
 
-public class Main extends Canvas implements Runnable {
+public class Main extends BasicGame {
 
     public int width, height;
 
     private ObjectHandler handler;
     private Place place;
 
-    public Main(int width, int height) {
+    public Main(String name, int width, int height) {
+        super(name);
         this.width = width;
         this.height = height;
-
-        new Window(this);
 
         handler = new ObjectHandler(this);
         place = new Place(handler);
 
-        this.addMouseListener(new Mouse(place));
-        this.addMouseMotionListener(new Mouse(place));
-        this.addKeyListener(new Keyboard(handler));
-
-        this.createBufferStrategy(2);
-
-        new Thread(this).start();
     }
 
     public static void main(String[] args) {
         try {
-            new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]));
+            AppGameContainer appGc;
+            appGc = new AppGameContainer(new Main("Map editor", Integer.parseInt(args[0]), Integer.parseInt(args[1])));
+            appGc.setDisplayMode(Integer.parseInt(args[0]), Integer.parseInt(args[1]), false);
+            appGc.setShowFPS(false);
+            appGc.setVSync(true);
+            appGc.setTargetFrameRate(60);
+            appGc.start();
         } catch (Exception e) {
-            new Main(640, 480);
+
+        }
+
+        try {
+            AppGameContainer appGc;
+            appGc = new AppGameContainer(new Main("Map editor", 640, 480));
+            appGc.setDisplayMode(640, 480, false);
+            appGc.setShowFPS(false);
+            appGc.setVSync(true);
+            appGc.setTargetFrameRate(60);
+            appGc.start();
+        } catch (Exception e) {
+
+        }
+
+    }
+
+    public void init(GameContainer gc) throws SlickException {
+    }
+
+    public void update(GameContainer gc, int i) throws SlickException {
+
+        Input input = gc.getInput();
+
+        place.Move(input.getAbsoluteMouseX(), input.getAbsoluteMouseY());
+
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            place.click(1);
+        } else if (input.isMousePressed(Input.MOUSE_MIDDLE_BUTTON)) {
+            place.click(2);
+        } else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+            place.click(3);
+        }
+
+        if (input.isKeyDown(Input.KEY_1)) {
+            //handler.type = Types.Wall;
+            handler.State = 1;
         }
     }
 
-    public void run() {
-        this.requestFocus();
-        while (true){
-            Thread.sleep(3);
-            render();
-        }
-    }
-
-    public void render() {
-        BufferStrategy bs = this.getBufferStrategy();
-
-        Graphics g = bs.getDrawGraphics();
-
+    public void render(GameContainer gc, Graphics g) throws SlickException {
         g.setColor(Color.white);
         g.fillRect(0, 0, width, height);
 
         handler.render(g);
         place.render(g);
 
-        g.setColor(Color.BLACK);
+        g.setColor(Color.black);
         int x, y;
         for (x = 0; x <= width; x += 32)
             g.drawLine(x, 0, x, height);
         for (y = 0; y <= height; y += 32)
             g.drawLine(0, y, width, y);
-
-        g.dispose();
-        bs.show();
-    }
-
-    public void New() {
-        String width = JOptionPane.showInputDialog("Width");
-        String height = JOptionPane.showInputDialog("Height");
-
-        try {
-            String javaBin = System.getProperty("java.home") + File.separator + "bin" + File.separator + "java";
-            File currentJar = new File(Main.class.getProtectionDomain().getCodeSource().getLocation().toURI());
-            if (!currentJar.getName().endsWith(".jar")) return;
-            ArrayList<String> command = new ArrayList<String>();
-            command.add(javaBin);
-            command.add("-jar");
-            command.add(currentJar.getPath());
-            command.add(width);
-            command.add(height);
-
-            ProcessBuilder builder = new ProcessBuilder(command);
-            builder.start();
-            System.exit(0);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void Import() {
-
-    }
-
-    public void Export() {
-
     }
 }

@@ -6,10 +6,17 @@ public class Main extends BasicGame {
 
     public int width, height;
 
+    private ObjectHandler handler;
+    private Place place;
+
     public Main(String name, int width, int height) {
         super(name);
         this.width = width;
         this.height = height;
+
+        handler = new ObjectHandler(this);
+        place = new Place(handler);
+
     }
 
     public static void main(String[] args) {
@@ -43,11 +50,31 @@ public class Main extends BasicGame {
     }
 
     public void update(GameContainer gc, int i) throws SlickException {
+
+        Input input = gc.getInput();
+
+        place.Move(input.getAbsoluteMouseX(), input.getAbsoluteMouseY());
+
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            place.click(1);
+        } else if (input.isMousePressed(Input.MOUSE_MIDDLE_BUTTON)) {
+            place.click(2);
+        } else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+            place.click(3);
+        }
+
+        if (input.isKeyDown(Input.KEY_1)) {
+            //handler.type = Types.Wall;
+            handler.State = 1;
+        }
     }
 
     public void render(GameContainer gc, Graphics g) throws SlickException {
         g.setColor(Color.white);
         g.fillRect(0, 0, width, height);
+
+        handler.render(g);
+        place.render(g);
 
         g.setColor(Color.black);
         int x, y;

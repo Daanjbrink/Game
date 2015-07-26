@@ -35,17 +35,27 @@ public class Menu {
         } else if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 48
                 && input.getAbsoluteMouseY() > 24 && input.getAbsoluteMouseY() < 48 && ShowMenu == 0) {
             HoverMenu = 1;
-            /*if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                ShowMenu = 0;
-            }*/
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                //main.New
+            }
         } else if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 48
                 && input.getAbsoluteMouseY() > 48 && input.getAbsoluteMouseY() < 72 && ShowMenu == 0) {
             HoverMenu = 2;
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                //main.Import
+            }
         } else if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 48
                 && input.getAbsoluteMouseY() > 72 && input.getAbsoluteMouseY() < 96 && ShowMenu == 0) {
             HoverMenu = 3;
+            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                //main.Export
+            }
         } else {
             HoverMenu = -1;
+        }
+
+        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || input.isMousePressed(Input.MOUSE_MIDDLE_BUTTON) || input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
+            ShowMenu = -1;
         }
     }
 

@@ -23,6 +23,10 @@ public class But_StartGame extends Object {
         g.drawImage(img, x, y);
     }
 
+    public void renderMP(Graphics g) {
+        g.drawImage(img, x - 16, y - 16);
+    }
+
     public void update() {
 
     }

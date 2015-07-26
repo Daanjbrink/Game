@@ -3,7 +3,6 @@ package MapEditor;
 import Game.Engine.Object;
 import Game.Objects.Wall;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class Place {
 
@@ -15,8 +14,8 @@ public class Place {
     }
 
     public void Move(int x, int y) {
-        this.mX = (int) Math.floor(x / 32) * 32 + 16;
-        this.mY = (int) Math.floor(y / 32) * 32 + 16;
+        this.mX = (int) Math.floor(x / 32) * 32 + 16 + 16;
+        this.mY = (int) Math.floor(y / 32) * 32 + 16 + 8;
 
         if (handler.State == 2) {
             handler.Selected.setX(mX);
@@ -97,15 +96,17 @@ public class Place {
         if (handler.State == 0) return;
 
         if (handler.State == 1) {
-            switch (handler.type) {
-                case Wall:
-                    try {
-                        Image img = new Image("src/Main/resources/Sprites/Wall/Wall 1.png");
-                        g.drawImage(img, mX - 16, mY - 16, null);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-                    break;
+            try {
+                switch (handler.type) {
+                    case Wall:
+                        Object tmp = new Wall(mX, mY);
+                        tmp.renderMP(g);
+                        tmp.setX(mX);
+                        tmp.setY(mY);
+                        break;
+                }
+            } catch (Exception e) {
+
             }
         }
     }

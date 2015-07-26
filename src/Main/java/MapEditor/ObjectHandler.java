@@ -9,6 +9,7 @@ public class ObjectHandler {
 
     public boolean[][] area;
     LinkedList<Object> objects = new LinkedList<Object>();
+
     //0=nothing
     //1=new block
     //2=move
@@ -28,7 +29,7 @@ public class ObjectHandler {
     public void render(Graphics g) {
         for (int i = 0; i < objects.size(); i++) {
             Object tmp = objects.get(i);
-            tmp.render(g);
+            tmp.renderMP(g);
         }
     }
 

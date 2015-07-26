@@ -11,7 +11,7 @@ public class But_Exit extends Object {
         this.y = y;
 
         try {
-            this.img = new Image("src/Main/resources/Sprites/Text/Exit.png");
+            this.img = new Image("Sprites/Text/Exit.png");
             this.width = img.getWidth();
             this.height = img.getHeight();
         } catch (Exception e) {
@@ -21,6 +21,10 @@ public class But_Exit extends Object {
 
     public void render(Graphics g) {
         g.drawImage(img, x, y);
+    }
+
+    public void renderMP(Graphics g) {
+        g.drawImage(img, x - 16, y - 16);
     }
 
     public void update() {

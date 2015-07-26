@@ -11,7 +11,7 @@ public class Wall extends Object {
         this.y = y;
 
         try {
-            this.img = new Image("src/Main/resources/Sprites/Wall/Wall 1.png");
+            this.img = new Image("Sprites/Wall/Wall 1.png");
             this.width = img.getWidth();
             this.height = img.getHeight();
         } catch (Exception e) {
@@ -20,7 +20,11 @@ public class Wall extends Object {
     }
 
     public void render(Graphics g) {
-        g.drawImage(img, x - 16, y - 16);
+        g.drawImage(img, x, y);
+    }
+
+    public void renderMP(Graphics g) {
+        g.drawImage(img, x - 32, y - 32);
     }
 
     public void update() {

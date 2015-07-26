@@ -106,7 +106,7 @@ public class Place {
                         break;
                 }
             } catch (Exception e) {
-
+                e.printStackTrace();
             }
         }
     }

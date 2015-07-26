@@ -60,13 +60,10 @@ public class Main extends BasicGame {
         place.Move(input.getAbsoluteMouseX(), input.getAbsoluteMouseY());
 
         if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-            menu.ShowMenu = -1;
             place.click(1);
         } else if (input.isMousePressed(Input.MOUSE_MIDDLE_BUTTON)) {
-            menu.ShowMenu = -1;
             place.click(2);
         } else if (input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-            menu.ShowMenu = -1;
             place.click(3);
         }
 

@@ -8,7 +8,7 @@ import java.util.LinkedList;
 public class ObjectHandler {
 
     public boolean[][] area;
-    LinkedList<Object> objects = new LinkedList<Object>();
+    LinkedList<Object> objects = new LinkedList<>();
 
     //0=nothing
     //1=new block
@@ -17,10 +17,8 @@ public class ObjectHandler {
     Object Selected = null;
     Types type = Types.Wall;
     int count;
-    private Main main;
 
     public ObjectHandler(Main main) {
-        this.main = main;
         this.area = new boolean[(int) Math.floor(main.width / 32) * 32 + 16][(int) Math.floor(main.height / 32) * 32 + 16];
 
         count = 0;

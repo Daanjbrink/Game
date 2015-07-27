@@ -13,7 +13,6 @@ public class Main extends BasicGame {
     private ObjectHandler handler;
     private Place place;
     private Menu menu;
-    private Functions func;
 
     private boolean Imported;
 
@@ -27,20 +26,16 @@ public class Main extends BasicGame {
 
         handler = new ObjectHandler(this);
         place = new Place(handler);
-        func = new Functions();
-        menu = new Menu(this, func);
+        menu = new Menu(this, new Functions());
 
     }
 
     public static void main(String[] args) {
-        for (String str : args) {
-            System.out.println(str);
-        }
         if (args.length == 0) {
             try {
                 AppGameContainer appGc;
-                appGc = new AppGameContainer(new Main("Map editor", 640, 480, false));
-                appGc.setDisplayMode(640, 480, false);
+                appGc = new AppGameContainer(new Main("Map editor", 640, 472, false));
+                appGc.setDisplayMode(640, 472, false);
                 appGc.setShowFPS(false);
                 appGc.setVSync(true);
                 appGc.setTargetFrameRate(60);
@@ -130,6 +125,18 @@ public class Main extends BasicGame {
         if (input.isKeyDown(Input.KEY_1)) {
             //handler.type = Types.Wall;
             handler.State = 1;
+        }
+        if (input.isKeyDown(Input.KEY_2)) {
+            System.out.println(handler.objects.size());
+        }
+        if (input.isKeyDown(Input.KEY_3)) {
+            System.out.println("X: " + input.getAbsoluteMouseX());
+            System.out.println("Y: " + input.getAbsoluteMouseY());
+            try {
+                Thread.sleep(1000);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

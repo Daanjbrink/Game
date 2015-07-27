@@ -38,6 +38,7 @@ public class Place {
                     }
                 }
             } else if (handler.State == 1) {
+                System.out.println(mX + " " + mY);
                 if (!PlaceFree(mX, mY)) return;
                 switch (handler.type) {
                     case Wall:

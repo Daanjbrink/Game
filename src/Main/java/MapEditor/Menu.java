@@ -1,67 +1,64 @@
 package MapEditor;
 
 import org.newdawn.slick.Color;
-import org.newdawn.slick.*;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
+import org.newdawn.slick.TrueTypeFont;
 
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 
 public class Menu {
 
     public int ShowMenu;
-    private int HoverMenu;
+    public int HoverMenu;
 
     private Main main;
-    private Color FileMenu;
+    private Functions func;
 
-    public Menu(Main main) {
+    public Menu(Main main, Functions func) {
         this.main = main;
-
-        FileMenu = Color.lightGray;
+        this.func = func;
 
         ShowMenu = -1;
         HoverMenu = -1;
     }
 
-    public void update(GameContainer gc) {
-        Input input = gc.getInput();
+    public void update(Input inp) {
 
-        if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 32
-                && input.getAbsoluteMouseY() > 0 && input.getAbsoluteMouseY() < 24) {
+        if (inp.getAbsoluteMouseX() > 0 && inp.getAbsoluteMouseX() < 32
+                && inp.getAbsoluteMouseY() > 0 && inp.getAbsoluteMouseY() < 24) {
             HoverMenu = 0;
-            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+            if (inp.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
                 ShowMenu = 0;
             }
-        } else if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 48
-                && input.getAbsoluteMouseY() > 24 && input.getAbsoluteMouseY() < 48 && ShowMenu == 0) {
+        } else if (inp.getAbsoluteMouseX() > 0 && inp.getAbsoluteMouseX() < 48
+                && inp.getAbsoluteMouseY() > 24 && inp.getAbsoluteMouseY() < 48 && ShowMenu == 0) {
             HoverMenu = 1;
-            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                //main.New
+            if (inp.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                int width = Integer.parseInt(JOptionPane.showInputDialog(null, "Width", "New", JOptionPane.PLAIN_MESSAGE));
+                int height = Integer.parseInt(JOptionPane.showInputDialog(null, "Height", "New", JOptionPane.PLAIN_MESSAGE));
+                func.New(width, height);
             }
-        } else if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 48
-                && input.getAbsoluteMouseY() > 48 && input.getAbsoluteMouseY() < 72 && ShowMenu == 0) {
+        } else if (inp.getAbsoluteMouseX() > 0 && inp.getAbsoluteMouseX() < 48
+                && inp.getAbsoluteMouseY() > 48 && inp.getAbsoluteMouseY() < 72 && ShowMenu == 0) {
             HoverMenu = 2;
-            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                //main.Import
+            if (inp.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                func.Import();
             }
-        } else if (input.getAbsoluteMouseX() > 0 && input.getAbsoluteMouseX() < 48
-                && input.getAbsoluteMouseY() > 72 && input.getAbsoluteMouseY() < 96 && ShowMenu == 0) {
+        } else if (inp.getAbsoluteMouseX() > 0 && inp.getAbsoluteMouseX() < 48
+                && inp.getAbsoluteMouseY() > 72 && inp.getAbsoluteMouseY() < 96 && ShowMenu == 0) {
             HoverMenu = 3;
-            if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
-                //main.Export
+            if (inp.isMousePressed(Input.MOUSE_LEFT_BUTTON)) {
+                func.Export();
             }
         } else {
             HoverMenu = -1;
         }
-
-        if (input.isMousePressed(Input.MOUSE_LEFT_BUTTON) || input.isMousePressed(Input.MOUSE_MIDDLE_BUTTON) || input.isMousePressed(Input.MOUSE_RIGHT_BUTTON)) {
-            ShowMenu = -1;
-        }
     }
 
     public void render(Graphics g) {
-        Font awtfont = new Font("Times New Roman", Font.PLAIN, 16);
-        TrueTypeFont font = new TrueTypeFont(awtfont, false);
+        TrueTypeFont font = new TrueTypeFont(new Font("Times New Roman", Font.PLAIN, 16), false);
 
 
         g.setColor(Color.lightGray);

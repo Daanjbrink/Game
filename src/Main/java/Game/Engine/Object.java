@@ -1,16 +1,15 @@
 package Game.Engine;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
+import org.newdawn.slick.opengl.Texture;
 
 public abstract class Object {
 
     protected int x, y, velX, velY, width, height, id;
-    protected Image img;
+    protected Texture img;
 
-    public abstract void render(Graphics g);
+    public abstract void render();
 
-    public abstract void renderMP(Graphics g);
+    public abstract void renderMP();
 
     public abstract void update();
 

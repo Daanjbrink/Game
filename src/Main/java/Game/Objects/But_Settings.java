@@ -1,30 +1,30 @@
 package Game.Objects;
 
+import Game.Engine.AssetManager;
+import Game.Engine.DrawImage;
 import Game.Engine.Object;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class But_Settings extends Object {
 
-    public But_Settings(int x, int y) {
+    public But_Settings(int x, int y, AssetManager manager) {
         this.x = x;
         this.y = y;
 
         try {
-            this.img = new Image("Sprites/Text/Settings.png");
-            this.width = img.getWidth();
-            this.height = img.getHeight();
+            this.img = manager.get("Text/Settings.png");
+            this.width =
+                    this.height = img.getImageHeight();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void render(Graphics g) {
-        g.drawImage(img, x, y);
+    public void render() {
+        new DrawImage().Draw(x, y, img);
     }
 
-    public void renderMP(Graphics g) {
-        g.drawImage(img, x - 16, y - 16);
+    public void renderMP() {
+
     }
 
     public void update() {

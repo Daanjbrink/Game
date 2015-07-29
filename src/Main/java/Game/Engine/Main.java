@@ -1,41 +1,80 @@
 package Game.Engine;
 
-import Game.GameStates.Game;
-import Game.GameStates.Loading;
 import Game.GameStates.Menu;
-import org.newdawn.slick.AppGameContainer;
-import org.newdawn.slick.GameContainer;
-import org.newdawn.slick.SlickException;
-import org.newdawn.slick.state.StateBasedGame;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.DisplayMode;
+import org.lwjgl.opengl.GL11;
 
-public class Main extends StateBasedGame {
+public class Main {
 
-    public static final int StateLoading = 0;
-    public static final int StateMenu = 1;
-    public static final int StateGame = 2;
+    public AssetManager manager;
+    public States state;
+    public int width, height;
+    private Loader loader;
+    private Menu menu;
 
-    public Main() {
-        super("Game");
+    public Main(int width, int height) {
+        this.width = width;
+        this.height = height;
+
+        manager = new AssetManager();
+
+        menu = new Menu(this);
+        loader = new Loader(this, menu);
+
+        this.enterState(States.Loading);
+
+        loader.init();
+
+        GameLoop();
     }
 
     public static void main(String[] args) {
         try {
-            AppGameContainer appGc = new AppGameContainer(new Main());
-            appGc.setDisplayMode(512, 128, false);
-            appGc.setShowFPS(false);
-            appGc.setVSync(true);
-            appGc.setTargetFrameRate(60);
-            appGc.setIcon("src/Main/resources/Sprites/Other/Icon.png");
-            appGc.start();
+            Display.setDisplayMode(new DisplayMode(640, 480));
+            Display.setVSyncEnabled(true);
+            Display.setTitle("Game");
+            Display.setResizable(false);
+            Display.create();
+            new Main(640, 480);
         } catch (Exception e) {
-
+            e.printStackTrace();
         }
     }
 
-    public void initStatesList(GameContainer container) throws SlickException {
-        this.addState(new Loading(this, StateLoading));
-        this.addState(new Menu(this, StateMenu));
-        this.addState(new Game(this, StateGame));
-        this.enterState(StateLoading);
+    public void enterState(States state) {
+        this.state = state;
+        switch (state) {
+            case Menu:
+                menu.init();
+                break;
+        }
+    }
+
+    private void GameLoop() {
+        while (!Display.isCloseRequested()) {
+            try {
+                Thread.sleep(3);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+
+            switch (state) {
+                case Loading:
+                    loader.render();
+                    break;
+
+                case Menu:
+                    menu.update();
+                    menu.render();
+                    break;
+            }
+
+            Display.update();
+            Display.sync(60);
+        }
+        Display.destroy();
     }
 }

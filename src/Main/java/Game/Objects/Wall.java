@@ -1,30 +1,30 @@
 package Game.Objects;
 
+import Game.Engine.AssetManager;
+import Game.Engine.DrawImage;
 import Game.Engine.Object;
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 
 public class Wall extends Object {
 
-    public Wall(int x, int y) {
+    public Wall(int x, int y, AssetManager manager) {
         this.x = x;
         this.y = y;
 
         try {
-            this.img = new Image("Sprites/Wall/Wall 1.png");
-            this.width = img.getWidth();
-            this.height = img.getHeight();
+            this.img = manager.get("Wall/Wall 1.png");
+            this.width = img.getImageWidth();
+            this.height = img.getImageHeight();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public void render(Graphics g) {
-        g.drawImage(img, x, y);
+    public void render() {
+        new DrawImage().Draw(x, y, img);
     }
 
-    public void renderMP(Graphics g) {
-        g.drawImage(img, x - 32, y - 32);
+    public void renderMP() {
+
     }
 
     public void update() {

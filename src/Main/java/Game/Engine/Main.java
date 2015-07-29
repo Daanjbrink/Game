@@ -7,9 +7,12 @@ import org.lwjgl.opengl.GL11;
 
 public class Main {
 
-    public AssetManager manager;
-    public States state;
     public int width, height;
+
+    public AssetManager manager;
+
+    public States state;
+
     private Loader loader;
     private Menu menu;
 
@@ -59,7 +62,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 
             switch (state) {
                 case Loading:

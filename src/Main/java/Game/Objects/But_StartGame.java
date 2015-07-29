@@ -3,6 +3,7 @@ package Game.Objects;
 import Game.Engine.AssetManager;
 import Game.Engine.DrawImage;
 import Game.Engine.Object;
+import org.lwjgl.input.Mouse;
 
 public class But_StartGame extends Object {
 
@@ -28,6 +29,11 @@ public class But_StartGame extends Object {
     }
 
     public void update() {
-
+        if (Mouse.isButtonDown(0)) {
+            if (Mouse.getX() > x && Mouse.getX() < (x + img.getImageWidth())
+                    && Mouse.getY() > y && Mouse.getY() < (y + img.getImageHeight())) {
+                System.out.println("Start");
+            }
+        }
     }
 }

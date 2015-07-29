@@ -42,8 +42,8 @@ public class Menu extends GameState {
 
         // Add buttons
         handler.addObject(new But_StartGame(8, 200, main.manager));
-        handler.addObject(new But_Settings(8, 150, main.manager));
-        handler.addObject(new But_Exit(8, 100, main.manager));
+        handler.addObject(new But_Settings(8, 170, main.manager));
+        handler.addObject(new But_Exit(8, 140, main.manager));
     }
 
     public void render() {
@@ -54,6 +54,8 @@ public class Menu extends GameState {
     }
 
     public void update() {
-
+        for (int i = 0; i < handler.objects.size(); i++) {
+            handler.objects.get(i).update();
+        }
     }
 }

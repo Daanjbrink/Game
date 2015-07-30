@@ -1,6 +1,7 @@
 package Game.Engine;
 
 import Game.GameStates.Menu;
+import Game.GameStates.Settings;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -15,6 +16,7 @@ public class Main {
 
     private Loader loader;
     private Menu menu;
+    private Settings settings;
 
     public Main(int width, int height) {
         this.width = width;
@@ -23,7 +25,8 @@ public class Main {
         manager = new AssetManager();
 
         menu = new Menu(this);
-        loader = new Loader(this, menu);
+        settings = new Settings(this);
+        loader = new Loader(this, menu, settings);
 
         this.enterState(States.Loading);
 
@@ -51,6 +54,9 @@ public class Main {
             case Menu:
                 menu.init();
                 break;
+            case Settings:
+                settings.init();
+                break;
         }
     }
 
@@ -72,6 +78,11 @@ public class Main {
                 case Menu:
                     menu.update();
                     menu.render();
+                    break;
+
+                case Settings:
+                    settings.update();
+                    settings.render();
                     break;
             }
 

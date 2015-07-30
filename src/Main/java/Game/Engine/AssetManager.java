@@ -7,6 +7,7 @@ import org.newdawn.slick.util.ResourceLoader;
 import java.util.ArrayList;
 
 public class AssetManager {
+
     ArrayList<PNGData> PNGassets = new ArrayList<>();
 
     public void loadPNG(String filename) {

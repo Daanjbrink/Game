@@ -1,6 +1,7 @@
 package Game.Engine;
 
 import Game.GameStates.Menu;
+import Game.GameStates.Settings;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
@@ -11,13 +12,15 @@ public class Loader {
 
     private Main main;
     private Menu menu;
+    private Settings settings;
 
     private Texture loadingTexture;
 
-    public Loader(Main main, Menu menu) {
+    public Loader(Main main, Menu menu, Settings settings) {
 
         this.main = main;
         this.menu = menu;
+        this.settings = settings;
 
         try {
             loadingTexture = TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("Sprites/Other/Loading.png"));
@@ -72,6 +75,9 @@ public class Loader {
 
     private void initTexture() {
         for (String str : menu.assets) {
+            main.manager.loadPNG(str);
+        }
+        for (String str : settings.assets) {
             main.manager.loadPNG(str);
         }
     }

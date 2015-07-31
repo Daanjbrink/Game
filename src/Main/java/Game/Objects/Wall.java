@@ -1,17 +1,21 @@
 package Game.Objects;
 
-import Game.Engine.AssetManager;
 import Game.Engine.DrawImage;
+import Game.Engine.Main;
 import Game.Engine.Object;
 
 public class Wall extends Object {
 
-    public Wall(int x, int y, AssetManager manager) {
+    private Main main;
+
+    public Wall(int x, int y, Main main) {
+        this.main = main;
+
         this.x = x;
         this.y = y;
 
         try {
-            this.img = manager.get("Wall/Wall 1.png");
+            this.img = main.manager.get("Wall/Wall 1.png");
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {

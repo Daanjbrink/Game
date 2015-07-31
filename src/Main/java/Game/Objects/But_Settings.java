@@ -1,23 +1,25 @@
 package Game.Objects;
 
-import Game.Engine.*;
+import Game.Engine.DrawImage;
+import Game.Engine.Main;
 import Game.Engine.Object;
+import Game.Engine.States;
 import org.lwjgl.input.Mouse;
 
 public class But_Settings extends Object {
 
     private Main main;
 
-    public But_Settings(int x, int y, AssetManager manager, Main main) {
+    public But_Settings(int x, int y, Main main) {
         this.main = main;
 
         this.x = x;
         this.y = y;
 
         try {
-            this.img = manager.get("Text/Settings.png");
-            this.width =
-                    this.height = img.getImageHeight();
+            this.img = main.manager.get("Text/Settings.png");
+            this.width = img.getImageWidth();
+            this.height = img.getImageHeight();
         } catch (Exception e) {
             e.printStackTrace();
         }

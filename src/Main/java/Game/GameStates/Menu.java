@@ -42,9 +42,9 @@ public class Menu extends GameState {
         background = main.manager.get("Other/Menu.png");
 
         // Add buttons
-        handler.addObject(new But_StartGame(8, 200, main.manager));
-        handler.addObject(new But_Settings(8, 170, main.manager, main));
-        handler.addObject(new But_Exit(8, 140, main.manager));
+        handler.addObject(new But_StartGame(8, 200, main));
+        handler.addObject(new But_Settings(8, 170, main));
+        handler.addObject(new But_Exit(8, 140, main));
     }
 
     public void render() {

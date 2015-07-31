@@ -169,7 +169,6 @@ public class Main {
     }
 
     public void render() {
-        //new DrawImage().DrawSquare(0, 0, width, height);
 
         handler.render();
         place.render();
@@ -179,11 +178,11 @@ public class Main {
         int x, y;
         for (x = 0; x <= width; x += 32) {
             GL11.glBegin(GL11.GL_LINES);
-            GL11.glVertex2f(x, height - 32);
+            GL11.glVertex2f(x, height);
             GL11.glVertex2f(x, 0);
             GL11.glEnd();
         }
-        for (y = 24; y <= height; y += 32) {
+        for (y = height - 24; y <= height; y -= 32) {
             GL11.glBegin(GL11.GL_LINES);
             GL11.glVertex2f(0, y);
             GL11.glVertex2f(width, y);
@@ -191,7 +190,6 @@ public class Main {
         }
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        menu.update();
-        menu.render();
+        //menu.render();
     }
 }

@@ -1,4 +1,4 @@
-package Game.Engine;
+package Game.Utils;
 
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.Color;
@@ -35,7 +35,6 @@ public class DrawImage {
         } else {
             GL11.glColor3f(211.0f, 211.0f, 211.0f);
         }
-        GL11.glColor3f(1f, 2f, 3f);
         GL11.glBegin(GL11.GL_QUADS);
         GL11.glVertex2f(x, y);
         GL11.glVertex2f(x + width, y);

@@ -1,6 +1,6 @@
 package MapEditor;
 
-import Game.Engine.DrawImage;
+import Game.Utils.DrawImage;
 import org.lwjgl.input.Mouse;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -28,13 +28,13 @@ public class Menu {
         if (Mouse.getX() > 0 && Mouse.getX() < 32
                 && Mouse.getY() > 0 && Mouse.getY() < 24) {
             HoverMenu = 0;
-            if (Mouse.isButtonDown(1)) {
+            if (Mouse.isButtonDown(0)) {
                 ShowMenu = 0;
             }
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
                 && Mouse.getY() > 24 && Mouse.getY() < 48 && ShowMenu == 0) {
             HoverMenu = 1;
-            if (Mouse.isButtonDown(1)) {
+            if (Mouse.isButtonDown(0)) {
                 int width = Integer.parseInt(JOptionPane.showInputDialog(null, "Width", "New", JOptionPane.PLAIN_MESSAGE));
                 int height = Integer.parseInt(JOptionPane.showInputDialog(null, "Height", "New", JOptionPane.PLAIN_MESSAGE));
                 func.New(width, height);
@@ -42,13 +42,13 @@ public class Menu {
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
                 && Mouse.getY() > 48 && Mouse.getY() < 72 && ShowMenu == 0) {
             HoverMenu = 2;
-            if (Mouse.isButtonDown(1)) {
+            if (Mouse.isButtonDown(0)) {
                 func.Import();
             }
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
                 && Mouse.getY() > 72 && Mouse.getY() < 96 && ShowMenu == 0) {
             HoverMenu = 3;
-            if (Mouse.isButtonDown(1)) {
+            if (Mouse.isButtonDown(0)) {
                 func.Export();
             }
         } else {

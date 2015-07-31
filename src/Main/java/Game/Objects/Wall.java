@@ -1,8 +1,8 @@
 package Game.Objects;
 
-import Game.Engine.DrawImage;
 import Game.Engine.Main;
 import Game.Engine.Object;
+import Game.Utils.DrawImage;
 
 public class Wall extends Object {
 

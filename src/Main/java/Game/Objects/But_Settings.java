@@ -1,9 +1,9 @@
 package Game.Objects;
 
-import Game.Engine.DrawImage;
 import Game.Engine.Main;
 import Game.Engine.Object;
 import Game.Engine.States;
+import Game.Utils.DrawImage;
 import org.lwjgl.input.Mouse;
 
 public class But_Settings extends Object {

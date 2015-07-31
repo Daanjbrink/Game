@@ -1,8 +1,8 @@
 package Game.GameStates;
 
-import Game.Engine.DrawImage;
 import Game.Engine.Main;
 import Game.Engine.ObjectHandler;
+import Game.Utils.DrawImage;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.opengl.Texture;

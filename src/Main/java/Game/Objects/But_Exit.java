@@ -1,8 +1,8 @@
 package Game.Objects;
 
-import Game.Engine.DrawImage;
 import Game.Engine.Main;
 import Game.Engine.Object;
+import Game.Utils.DrawImage;
 import org.lwjgl.input.Mouse;
 
 public class But_Exit extends Object {
@@ -36,7 +36,7 @@ public class But_Exit extends Object {
         if (Mouse.isButtonDown(0)) {
             if (Mouse.getX() > x && Mouse.getX() < (x + img.getImageWidth())
                     && Mouse.getY() > y && Mouse.getY() < (y + img.getImageHeight())) {
-                System.out.println("Exit");
+                System.exit(0);
             }
         }
     }

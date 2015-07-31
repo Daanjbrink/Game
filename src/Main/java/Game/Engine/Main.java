@@ -2,6 +2,7 @@ package Game.Engine;
 
 import Game.GameStates.Menu;
 import Game.GameStates.Settings;
+import Game.Utils.AssetManager;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;

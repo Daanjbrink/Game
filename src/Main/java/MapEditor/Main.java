@@ -1,6 +1,6 @@
 package MapEditor;
 
-import Game.Engine.AssetManager;
+import Game.Utils.AssetManager;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;

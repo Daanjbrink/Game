@@ -5,7 +5,7 @@ import Game.Engine.ObjectHandler;
 import Game.Objects.But_Exit;
 import Game.Objects.But_Settings;
 import Game.Objects.But_StartGame;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.opengl.Texture;
@@ -42,13 +42,13 @@ public class Menu extends GameState {
         background = main.manager.get("Other/Menu.png");
 
         // Add buttons
-        handler.addObject(new But_StartGame(8, 200, main));
-        handler.addObject(new But_Settings(8, 170, main));
-        handler.addObject(new But_Exit(8, 140, main));
+        handler.addObject(new But_StartGame(8, 200 - 32, main));
+        handler.addObject(new But_Settings(8, 170 - 32, main));
+        handler.addObject(new But_Exit(8, 140 + 128, main));
     }
 
     public void render() {
-        new DrawImage().Draw(0, -32, background);
+        new Draw().Draw(0, 0, background);
         for (int i = 0; i < handler.objects.size(); i++) {
             handler.objects.get(i).render();
         }

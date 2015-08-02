@@ -2,11 +2,13 @@ package Game.Objects;
 
 import Game.Engine.Main;
 import Game.Engine.Object;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 
 public class Wall extends Object {
 
     private Main main;
+
+    private String imgLoc = "Wall/Wall 1.png";
 
     public Wall(int x, int y, Main main) {
         this.main = main;
@@ -15,7 +17,7 @@ public class Wall extends Object {
         this.y = y;
 
         try {
-            this.img = main.manager.get("Wall/Wall 1.png");
+            this.img = main.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {
@@ -24,7 +26,7 @@ public class Wall extends Object {
     }
 
     public void render() {
-        new DrawImage().Draw(x, y, img);
+        new Draw().Draw(x, y, img);
     }
 
     public void renderMP() {

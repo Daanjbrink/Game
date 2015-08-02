@@ -3,12 +3,14 @@ package Game.Objects;
 import Game.Engine.Main;
 import Game.Engine.Object;
 import Game.Engine.States;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
 
 public class But_Settings extends Object {
 
     private Main main;
+
+    private String imgLoc = "Text/Settings.png";
 
     public But_Settings(int x, int y, Main main) {
         this.main = main;
@@ -17,7 +19,7 @@ public class But_Settings extends Object {
         this.y = y;
 
         try {
-            this.img = main.manager.get("Text/Settings.png");
+            this.img = main.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {
@@ -26,7 +28,7 @@ public class But_Settings extends Object {
     }
 
     public void render() {
-        new DrawImage().Draw(x, y, img);
+        new Draw().Draw(x, y, img);
     }
 
     public void renderMP() {

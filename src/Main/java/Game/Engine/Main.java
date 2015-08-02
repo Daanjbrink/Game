@@ -69,7 +69,7 @@ public class Main {
                 e.printStackTrace();
             }
 
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
 
             switch (state) {
                 case Loading:

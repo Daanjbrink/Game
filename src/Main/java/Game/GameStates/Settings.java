@@ -2,7 +2,7 @@ package Game.GameStates;
 
 import Game.Engine.Main;
 import Game.Engine.ObjectHandler;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.newdawn.slick.opengl.Texture;
@@ -39,7 +39,7 @@ public class Settings extends GameState {
     }
 
     public void render() {
-        new DrawImage().Draw(0, -32, background);
+        new Draw().Draw(0, -32, background);
         for (int i = 0; i < handler.objects.size(); i++) {
             handler.objects.get(i).render();
         }

@@ -2,12 +2,14 @@ package Game.Objects;
 
 import Game.Engine.Main;
 import Game.Engine.Object;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
 
 public class But_StartGame extends Object {
 
     private Main main;
+
+    private String imgLoc = "Text/Play.png";
 
     public But_StartGame(int x, int y, Main main) {
         this.main = main;
@@ -16,7 +18,7 @@ public class But_StartGame extends Object {
         this.y = y;
 
         try {
-            this.img = main.manager.get("Text/Play.png");
+            this.img = main.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {
@@ -25,7 +27,7 @@ public class But_StartGame extends Object {
     }
 
     public void render() {
-        new DrawImage().Draw(x, y, img);
+        new Draw().Draw(x, y, img);
     }
 
     public void renderMP() {

@@ -4,17 +4,17 @@ import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 
-public class Receiver extends Thread {
+public class Receiver implements Runnable {
 
     private DatagramSocket socket;
 
     public Receiver(DatagramSocket socket) {
         this.socket = socket;
 
-        receive();
     }
 
-    public void receive() {
+    @Override
+    public void run() {
         while (true) {
             try {
                 Thread.sleep(3);
@@ -33,5 +33,4 @@ public class Receiver extends Thread {
             System.out.println("Next");
         }
     }
-
 }

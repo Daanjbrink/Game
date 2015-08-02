@@ -1,5 +1,8 @@
 package Server;
 
+import Utils.Log;
+import Utils.LogLevel;
+
 import java.io.IOException;
 import java.net.DatagramPacket;
 import java.net.DatagramSocket;
@@ -16,6 +19,7 @@ public class Receiver implements Runnable {
 
     @Override
     public void run() {
+        Log.log("Started Receiver at UDP port " + socket.getLocalPort(), LogLevel.INFO);
         while (true) {
             try {
                 Thread.sleep(3);
@@ -29,7 +33,7 @@ public class Receiver implements Runnable {
                 socket.receive(recvPacket);
                 packets.add(recvPacket.getData());
             } catch (IOException e) {
-                //e.printStackTrace();
+                Log.log("Failed to receive UDP packet exception: " + e, LogLevel.ERROR);
             }
         }
     }

@@ -8,6 +8,8 @@ public class Wall extends Object {
 
     private Main main;
 
+    private String imgLoc = "Wall/Wall 1.png";
+
     public Wall(int x, int y, Main main) {
         this.main = main;
 
@@ -15,7 +17,7 @@ public class Wall extends Object {
         this.y = y;
 
         try {
-            this.img = main.manager.get("Wall/Wall 1.png");
+            this.img = main.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {

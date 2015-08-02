@@ -9,6 +9,8 @@ public class But_Exit extends Object {
 
     private Main main;
 
+    private String imgLoc = "Text/Exit.png";
+
     public But_Exit(int x, int y, Main main) {
         this.main = main;
 
@@ -16,7 +18,7 @@ public class But_Exit extends Object {
         this.y = y;
 
         try {
-            this.img = main.manager.get("Text/Exit.png");
+            this.img = main.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {

@@ -9,6 +9,8 @@ public class But_StartGame extends Object {
 
     private Main main;
 
+    private String imgLoc = "Text/Play.png";
+
     public But_StartGame(int x, int y, Main main) {
         this.main = main;
 
@@ -16,7 +18,7 @@ public class But_StartGame extends Object {
         this.y = y;
 
         try {
-            this.img = main.manager.get("Text/Play.png");
+            this.img = main.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {

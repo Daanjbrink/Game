@@ -3,27 +3,30 @@ package com.Malloten;
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 
-public class Main extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable {
 
     private Thread thread;
     private boolean running = false;
 
     private Handler handler;
+    private Connection connection;
 
-    public Main() {
+    public Game() {
         new Window(this);
 
         handler = new Handler();
+        connection = new Connection();
 
         this.addKeyListener(new KeyInput(handler));
 
         handler.addObject(new Player(32, 32));
+        MouseInfo.getPointerInfo().getLocation();
 
         start();
     }
 
     public static void main(String[] args) {
-        new Main();
+        new Game();
     }
 
     public synchronized void start() {
@@ -62,7 +65,7 @@ public class Main extends Canvas implements Runnable {
             frames++;
             if (System.currentTimeMillis() - timer > 1000) {
                 timer += 1000;
-                //System.out.println("FPS: " + frames);
+                System.out.println("FPS: " + frames);
                 frames = 0;
             }
         }
@@ -71,6 +74,7 @@ public class Main extends Canvas implements Runnable {
 
     private void tick() {
         handler.tick();
+        connection.tick();
     }
 
     private void render() {
@@ -89,9 +93,5 @@ public class Main extends Canvas implements Runnable {
 
         g.dispose();
         bs.show();
-    }
-
-    public void addObject(GameObject object) {
-
     }
 }

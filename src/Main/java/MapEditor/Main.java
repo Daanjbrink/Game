@@ -2,9 +2,6 @@ package MapEditor;
 
 import Game.Utils.AssetManager;
 import Game.Utils.Draw;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 
 import java.io.File;
@@ -48,7 +45,7 @@ public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
             try {
-                Display.setDisplayMode(new DisplayMode(640, 481));
+                Display.setDisplayMode(new DisplayMode(640, 480));
                 Display.setVSyncEnabled(true);
                 Display.setTitle("MapEditor");
                 Display.create();

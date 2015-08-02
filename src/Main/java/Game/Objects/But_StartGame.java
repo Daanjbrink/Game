@@ -3,7 +3,6 @@ package Game.Objects;
 import Game.Engine.Main;
 import Game.Engine.Object;
 import Game.Utils.Draw;
-import org.lwjgl.input.Mouse;
 
 public class But_StartGame extends Object {
 

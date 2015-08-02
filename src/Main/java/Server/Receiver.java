@@ -11,10 +11,10 @@ public class Receiver extends Thread {
     public Receiver(DatagramSocket socket) {
         this.socket = socket;
 
-        Receive();
+        receive();
     }
 
-    public void Receive() {
+    public void receive() {
         while (true) {
             try {
                 Thread.sleep(3);

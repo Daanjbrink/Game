@@ -2,7 +2,7 @@ package Game.Objects;
 
 import Game.Engine.Main;
 import Game.Engine.Object;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 
 public class Wall extends Object {
 
@@ -26,7 +26,7 @@ public class Wall extends Object {
     }
 
     public void render() {
-        new DrawImage().Draw(x, y, img);
+        new Draw().Draw(x, y, img);
     }
 
     public void renderMP() {

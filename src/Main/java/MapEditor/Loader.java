@@ -30,7 +30,8 @@ public class Loader {
 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, main.width, 0, main.height, 1, -1);
+        GL11.glOrtho(0, 640, 480, 0, 1, -1);
+        //GL11.glViewport(0, 0, 640, 480);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
     }
 

@@ -3,7 +3,7 @@ package Game.Objects;
 import Game.Engine.Main;
 import Game.Engine.Object;
 import Game.Engine.States;
-import Game.Utils.DrawImage;
+import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
 
 public class But_Settings extends Object {
@@ -28,7 +28,7 @@ public class But_Settings extends Object {
     }
 
     public void render() {
-        new DrawImage().Draw(x, y, img);
+        new Draw().Draw(x, y, img);
     }
 
     public void renderMP() {

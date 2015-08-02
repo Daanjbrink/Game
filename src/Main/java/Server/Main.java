@@ -17,7 +17,6 @@ public class Main {
 
         try {
             socket = new DatagramSocket(port);
-            socket.setSoTimeout(1000);
         } catch (Exception e) {
             Log.log("Error opening socket on " + port, LogLevel.ERROR);
             e.printStackTrace();

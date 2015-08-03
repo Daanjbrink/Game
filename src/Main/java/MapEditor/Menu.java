@@ -2,7 +2,6 @@ package MapEditor;
 
 import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -25,19 +24,17 @@ public class Menu {
         HoverMenu = -1;
     }
 
-    public void update() {
-
-        Display.setTitle("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " Hovermenu: " + HoverMenu
-                + " Showmenu: " + ShowMenu);
+    public boolean update() {
 
         if (Mouse.getX() > 0 && Mouse.getX() < 32
-                && Mouse.getY() > 0 && Mouse.getY() < 24) {
+                && (main.height - Mouse.getY()) > 0 && (main.height - Mouse.getY()) < 24) {
             HoverMenu = 0;
             if (Mouse.isButtonDown(0)) {
                 ShowMenu = 0;
+                return true;
             }
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
-                && Mouse.getY() > 24 && Mouse.getY() < 48 && ShowMenu == 0) {
+                && (main.height - Mouse.getY()) > 24 && (main.height - Mouse.getY()) < 48 && ShowMenu == 0) {
             HoverMenu = 1;
             if (Mouse.isButtonDown(0)) {
                 int width = Integer.parseInt(JOptionPane.showInputDialog(null, "Width", "New", JOptionPane.PLAIN_MESSAGE));
@@ -45,21 +42,21 @@ public class Menu {
                 func.New(width, height);
             }
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
-                && Mouse.getY() > 48 && Mouse.getY() < 72 && ShowMenu == 0) {
+                && (main.height - Mouse.getY()) > 48 && (main.height - Mouse.getY()) < 72 && ShowMenu == 0) {
             HoverMenu = 2;
             if (Mouse.isButtonDown(0)) {
                 func.Import();
             }
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
-                && Mouse.getY() > 72 && Mouse.getY() < 96 && ShowMenu == 0) {
+                && (main.height - Mouse.getY()) > 72 && (main.height - Mouse.getY()) < 96 && ShowMenu == 0) {
             HoverMenu = 3;
             if (Mouse.isButtonDown(0)) {
                 func.Export();
             }
         } else {
-            HoverMenu = 0;
-            ShowMenu = 0;
+            HoverMenu = -1;
         }
+        return false;
     }
 
     public void render() {

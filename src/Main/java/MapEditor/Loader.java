@@ -20,7 +20,6 @@ public class Loader {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
         GL11.glClearColor(255.0f, 255.0f, 255.0f, 255.0f);
-        //GL11.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
@@ -30,7 +29,7 @@ public class Loader {
 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
-        GL11.glOrtho(0, 640, 480, 0, 1, -1);
+        GL11.glOrtho(0, main.width, main.height, 0, 1, -1);
         //GL11.glViewport(0, 0, 640, 480);
         GL11.glMatrixMode(GL11.GL_MODELVIEW);
     }

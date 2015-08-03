@@ -38,7 +38,7 @@ public class But_Settings extends Object {
     public void update() {
         if (Mouse.isButtonDown(0)) {
             if (Mouse.getX() > x && Mouse.getX() < (x + img.getImageWidth())
-                    && Mouse.getY() > y && Mouse.getY() < (y + img.getImageHeight())) {
+                    && (main.height - Mouse.getY()) > y && (main.height - Mouse.getY()) < (y + height)) {
                 main.enterState(States.Settings);
             }
         }

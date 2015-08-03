@@ -36,8 +36,8 @@ public class But_Exit extends Object {
 
     public void update() {
         if (Mouse.isButtonDown(0)) {
-            if (Mouse.getX() > x && Mouse.getX() < (x + img.getImageWidth())
-                    && Mouse.getY() > y && Mouse.getY() < (y + img.getImageHeight())) {
+            if (Mouse.getX() > x && Mouse.getX() < (x + width)
+                    && (main.height - Mouse.getY()) > y && (main.height - Mouse.getY()) < (y + height)) {
                 System.exit(0);
             }
         }

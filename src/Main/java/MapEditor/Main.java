@@ -2,6 +2,7 @@ package MapEditor;
 
 import Game.Utils.AssetManager;
 import Game.Utils.Draw;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -17,9 +18,10 @@ public class Main {
     };
 
     public int width, height;
-
     public AssetManager manager;
-
+    int camX = 0;
+    int camY = 0;
+    private int[] keys = new int[4];
     private ObjectHandler handler;
     private Place place;
     private Menu menu;
@@ -53,13 +55,13 @@ public class Main {
                 Display.setTitle("MapEditor");
                 Display.create();
 
-                new Main(640, 472, false);
+                new Main(1000, 1000, false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (args.length == 2) {
             try {
-                Display.setDisplayMode(new DisplayMode(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
+                Display.setDisplayMode(new DisplayMode(640, 472));
                 Display.setVSyncEnabled(true);
                 Display.setTitle("MapEditor");
                 Display.create();
@@ -71,7 +73,7 @@ public class Main {
         } else if (args.length == 3) {
             //if(args[0] == "-Import"){
             try {
-                Display.setDisplayMode(new DisplayMode(Integer.parseInt(args[0]), Integer.parseInt(args[1])));
+                Display.setDisplayMode(new DisplayMode(640, 480));
                 Display.setVSyncEnabled(true);
                 Display.setTitle("MapEditor");
                 Display.create();
@@ -126,8 +128,14 @@ public class Main {
 
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
 
-            update();
+            GL11.glPushMatrix();
+
+            GL11.glTranslatef(-camX, -camY, 0);
+
             render();
+            update();
+
+            GL11.glPopMatrix();
 
             Display.update();
             Display.sync(60);
@@ -137,6 +145,40 @@ public class Main {
 
     public void update() {
         place.Move(Mouse.getX(), Mouse.getY());
+
+        while (Keyboard.next()) {
+            if (Keyboard.getEventKeyState()) {
+                if (Keyboard.getEventKey() == Keyboard.KEY_W)
+                    keys[0] = 10;
+                if (Keyboard.getEventKey() == Keyboard.KEY_A)
+                    keys[1] = 10;
+                if (Keyboard.getEventKey() == Keyboard.KEY_S)
+                    keys[2] = 10;
+                if (Keyboard.getEventKey() == Keyboard.KEY_D)
+                    keys[3] = 10;
+            } else {
+                if (Keyboard.getEventKey() == Keyboard.KEY_W)
+                    keys[0] = 0;
+                if (Keyboard.getEventKey() == Keyboard.KEY_A)
+                    keys[1] = 0;
+                if (Keyboard.getEventKey() == Keyboard.KEY_S)
+                    keys[2] = 0;
+                if (Keyboard.getEventKey() == Keyboard.KEY_D)
+                    keys[3] = 0;
+            }
+        }
+
+        camX += (keys[3] - keys[1]);
+        camY += (keys[2] - keys[0]);
+
+        if (camX > (width - 640))
+            camX = (width - 640);
+        if (camX < 0)
+            camX = 0;
+        if (camY >= (height - 472))
+            camY = (height - 472);
+        if (camY < 0)
+            camY = 0;
 
         if (menu.update())
             return;

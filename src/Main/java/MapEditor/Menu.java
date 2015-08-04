@@ -2,6 +2,7 @@ package MapEditor;
 
 import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -26,14 +27,16 @@ public class Menu {
 
     public boolean update() {
 
-        if (Mouse.getX() > 0 && Mouse.getX() < 32
-                && (main.height - Mouse.getY()) > 0 && (main.height - Mouse.getY()) < 24) {
+        Display.setTitle("X: " + Mouse.getX() + " Y: " + (Display.getHeight() - Mouse.getY()));
+
+        if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 32)
+                && (Display.getHeight() - Mouse.getY()) > 0 && (Display.getHeight() - Mouse.getY()) < 24) {
             HoverMenu = 0;
             if (Mouse.isButtonDown(0)) {
                 ShowMenu = 0;
                 return true;
             }
-        } else if (Mouse.getX() > 0 && Mouse.getX() < 48
+        } else if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 48)
                 && (main.height - Mouse.getY()) > 24 && (main.height - Mouse.getY()) < 48 && ShowMenu == 0) {
             HoverMenu = 1;
             if (Mouse.isButtonDown(0)) {
@@ -45,13 +48,13 @@ public class Menu {
                     e.printStackTrace();
                 }
             }
-        } else if (Mouse.getX() > 0 && Mouse.getX() < 48
+        } else if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 48)
                 && (main.height - Mouse.getY()) > 48 && (main.height - Mouse.getY()) < 72 && ShowMenu == 0) {
             HoverMenu = 2;
             if (Mouse.isButtonDown(0)) {
                 func.Import();
             }
-        } else if (Mouse.getX() > 0 && Mouse.getX() < 48
+        } else if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 48)
                 && (main.height - Mouse.getY()) > 72 && (main.height - Mouse.getY()) < 96 && ShowMenu == 0) {
             HoverMenu = 3;
             if (Mouse.isButtonDown(0)) {
@@ -66,11 +69,11 @@ public class Menu {
     public void render() {
         TrueTypeFont font = new TrueTypeFont(new Font("Times New Roman", Font.PLAIN, 16), false);
 
-        new Draw().FillRect(0, 0, main.width, 24, new byte[]{(byte) 190, (byte) 190, (byte) 190});
+        new Draw().FillRect(main.camX, main.camY, main.width, 24, new byte[]{(byte) 190, (byte) 190, (byte) 190});
 
         switch (ShowMenu) {
             case 0:
-                new Draw().FillRect(0, 24, 48, 72, new byte[]{(byte) 190, (byte) 190, (byte) 190});
+                new Draw().FillRect(main.camX, main.camY + 24, 48, 72, new byte[]{(byte) 190, (byte) 190, (byte) 190});
                 break;
         }
 
@@ -80,50 +83,33 @@ public class Menu {
         //3 = File>Export
         switch (HoverMenu) {
             case 0:
-                new Draw().FillRect(0, 0, 32, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
+                new Draw().FillRect(main.camX, main.camY, 32, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
                 break;
             case 1:
-                new Draw().FillRect(0, 24, 48, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
+                new Draw().FillRect(main.camX, main.camY + 24, 48, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
                 break;
             case 2:
-                new Draw().FillRect(0, 48, 48, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
+                new Draw().FillRect(main.camX, main.camY + 48, 48, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
                 break;
             case 3:
-                new Draw().FillRect(0, 72, 48, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
+                new Draw().FillRect(main.camX, main.camY + 72, 48, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
                 break;
         }
 
         //0 = File
         switch (ShowMenu) {
             case 0:
-                /*g.setColor(Color.black);
-                g.setFont(font);
-                g.drawString("New...", 3, 26);
-
-                g.setColor(Color.black);
-                g.drawLine(0, 48, 48, 48);
-
-                g.setColor(Color.black);
-                g.setFont(font);
-                g.drawString("Import", 3, 50);
-
-                g.setColor(Color.black);
-                g.setFont(font);
-                g.drawString("Export", 3, 74);
-
-                g.setColor(Color.black);
-                g.drawRect(0, 24, 48, 72);*/
-                font.drawString(3, 26, "New...");
+                font.drawString(3, main.camY + 26, "New...");
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 GL11.glColor3d(0, 0, 0);
                 GL11.glBegin(GL11.GL_LINES);
-                GL11.glVertex2d(0, 48);
-                GL11.glVertex2d(48, 48);
+                GL11.glVertex2d(main.camX, main.camY + 48);
+                GL11.glVertex2d(main.camX + 48, main.camY + 48);
                 GL11.glEnd();
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
-                font.drawString(3, 50, "Import");
-                font.drawString(3, 74, "Export");
-                new Draw().DrawRect(0, 24, 48, 72, new byte[]{(byte) 0, (byte) 0, (byte) 0});
+                font.drawString(main.camX + 3, main.camY + 50, "Import");
+                font.drawString(main.camX + 3, main.camY + 74, "Export");
+                new Draw().DrawRect(0, main.camY + 24, 48, 72, new byte[]{(byte) 0, (byte) 0, (byte) 0});
                 break;
         }
 
@@ -131,6 +117,6 @@ public class Menu {
         g.setFont(font);
         g.drawString("File", 5, 2);*/
 
-        font.drawString(5, 2, "File");
+        font.drawString(main.camX + 5, main.camY + 2, "File");
     }
 }

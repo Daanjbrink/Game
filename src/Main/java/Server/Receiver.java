@@ -12,6 +12,7 @@ public class Receiver implements Runnable {
 
     private DatagramSocket socket;
     private ConcurrentLinkedQueue<byte[]> packets;
+
     public Receiver(DatagramSocket socket) {
         this.socket = socket;
         packets = new ConcurrentLinkedQueue<>();
@@ -39,7 +40,7 @@ public class Receiver implements Runnable {
     }
 
     public byte[] getPacket() {
-       return getPacket(true);
+        return getPacket(true);
     }
 
     public byte[] getPacket(boolean remove) {

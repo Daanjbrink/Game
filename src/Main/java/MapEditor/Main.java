@@ -180,7 +180,7 @@ public class Main {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
         GL11.glColor3d(0, 0, 0);
         int x, y;
-        for (x = 0; x <= width - 24; x += 32) {
+        for (x = 0; x <= width; x += 32) {
             GL11.glBegin(GL11.GL_LINES);
             GL11.glVertex2f(x, height);
             GL11.glVertex2f(x, 0);

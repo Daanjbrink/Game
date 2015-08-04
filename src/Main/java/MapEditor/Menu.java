@@ -37,9 +37,13 @@ public class Menu {
                 && (main.height - Mouse.getY()) > 24 && (main.height - Mouse.getY()) < 48 && ShowMenu == 0) {
             HoverMenu = 1;
             if (Mouse.isButtonDown(0)) {
-                int width = Integer.parseInt(JOptionPane.showInputDialog(null, "Width", "New", JOptionPane.PLAIN_MESSAGE));
-                int height = Integer.parseInt(JOptionPane.showInputDialog(null, "Height", "New", JOptionPane.PLAIN_MESSAGE));
-                func.New(width, height);
+                try {
+                    int width = Integer.parseInt(JOptionPane.showInputDialog(null, "Width", "New", JOptionPane.PLAIN_MESSAGE));
+                    int height = Integer.parseInt(JOptionPane.showInputDialog(null, "Height", "New", JOptionPane.PLAIN_MESSAGE));
+                    func.New(width, height);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         } else if (Mouse.getX() > 0 && Mouse.getX() < 48
                 && (main.height - Mouse.getY()) > 48 && (main.height - Mouse.getY()) < 72 && ShowMenu == 0) {

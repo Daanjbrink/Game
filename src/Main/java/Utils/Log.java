@@ -17,6 +17,7 @@ public class Log {
 
     /**
      * Enables a specific loglevel.
+     *
      * @param lvl The loglevel to be enabled.
      */
     public static void enableLevel(LogLevel lvl) {
@@ -27,6 +28,7 @@ public class Log {
 
     /**
      * Disables a specific loglevel.
+     *
      * @param lvl The loglevel to be disabled.
      */
     public static void disableLevel(LogLevel lvl) {
@@ -38,7 +40,7 @@ public class Log {
      * Enables all loglevels.
      */
     public static void enableAllLevels() {
-        for(LogLevel lvl : LogLevel.values()) {
+        for (LogLevel lvl : LogLevel.values()) {
             enableLevel(lvl);
         }
     }
@@ -53,6 +55,7 @@ public class Log {
 
     /**
      * Logs a String at the desired loglevel.
+     *
      * @param msg The message to be logged.
      * @param lvl The level at which you want to log the message.
      */

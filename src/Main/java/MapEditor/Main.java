@@ -19,8 +19,9 @@ public class Main {
 
     public int width, height;
     public AssetManager manager;
-    int camX = 0;
-    int camY = 0;
+    public int camX = 0;
+    public int camY = 0;
+    public int camSpd = 10;
     private int[] keys = new int[4];
     private ObjectHandler handler;
     private Place place;
@@ -149,13 +150,13 @@ public class Main {
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
                 if (Keyboard.getEventKey() == Keyboard.KEY_W)
-                    keys[0] = 10;
+                    keys[0] = camSpd;
                 if (Keyboard.getEventKey() == Keyboard.KEY_A)
-                    keys[1] = 10;
+                    keys[1] = camSpd;
                 if (Keyboard.getEventKey() == Keyboard.KEY_S)
-                    keys[2] = 10;
+                    keys[2] = camSpd;
                 if (Keyboard.getEventKey() == Keyboard.KEY_D)
-                    keys[3] = 10;
+                    keys[3] = camSpd;
             } else {
                 if (Keyboard.getEventKey() == Keyboard.KEY_W)
                     keys[0] = 0;

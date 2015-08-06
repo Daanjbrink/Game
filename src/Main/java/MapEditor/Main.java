@@ -18,16 +18,20 @@ public class Main {
     };
 
     public int width, height;
-    public AssetManager manager;
     public int camX = 0;
     public int camY = 0;
     public int camSpd = 10;
+
+    public AssetManager manager;
+
     private int[] keys = new int[4];
+
     private ObjectHandler handler;
     private Place place;
     private Menu menu;
 
     private boolean Imported;
+    private boolean ShowMenu;
 
     public Main(int width, int height, boolean imported) {
         this.width = width;
@@ -37,6 +41,7 @@ public class Main {
 
         if (imported)
             this.Imported = true;
+        ShowMenu = true;
 
         handler = new ObjectHandler(this);
         place = new Place(handler);
@@ -51,18 +56,18 @@ public class Main {
     public static void main(String[] args) {
         if (args.length == 0) {
             try {
-                Display.setDisplayMode(new DisplayMode(640, 472));
+                Display.setDisplayMode(new DisplayMode(640, 480));
                 Display.setVSyncEnabled(true);
                 Display.setTitle("MapEditor");
                 Display.create();
 
-                new Main(1000, 1000, false);
+                new Main(640, 480, false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (args.length == 2) {
             try {
-                Display.setDisplayMode(new DisplayMode(640, 472));
+                Display.setDisplayMode(new DisplayMode(640, 480));
                 Display.setVSyncEnabled(true);
                 Display.setTitle("MapEditor");
                 Display.create();
@@ -149,6 +154,9 @@ public class Main {
 
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
+                if (Keyboard.getEventKey() == Keyboard.KEY_LMENU)
+                    ShowMenu = !ShowMenu;
+
                 if (Keyboard.getEventKey() == Keyboard.KEY_W)
                     keys[0] = camSpd;
                 if (Keyboard.getEventKey() == Keyboard.KEY_A)
@@ -176,13 +184,14 @@ public class Main {
             camX = (width - 640);
         if (camX < 0)
             camX = 0;
-        if (camY >= (height - 472))
-            camY = (height - 472);
+        if (camY >= (height - 480))
+            camY = (height - 480);
         if (camY < 0)
             camY = 0;
 
-        if (menu.update())
-            return;
+        if (ShowMenu)
+            if (menu.update())
+                return;
 
         if (Mouse.isButtonDown(0)) {
             menu.ShowMenu = -1;
@@ -194,23 +203,6 @@ public class Main {
             menu.ShowMenu = -1;
             place.click(3);
         }
-
-        /*if (input.isKeyDown(Input.KEY_1)) {
-            //handler.type = Types.Wall;
-            handler.State = 1;
-        }
-        if (input.isKeyDown(Input.KEY_2)) {
-            System.out.println(handler.objects.size());
-        }
-        if (input.isKeyDown(Input.KEY_3)) {
-            System.out.println("X: " + input.getAbsoluteMouseX());
-            System.out.println("Y: " + input.getAbsoluteMouseY());
-            try {
-                Thread.sleep(1000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }*/
     }
 
     public void render() {
@@ -229,7 +221,7 @@ public class Main {
             GL11.glVertex2f(x, 0);
             GL11.glEnd();
         }
-        for (y = 24; y <= height; y += 32) {
+        for (y = 0; y <= height; y += 32) {
             GL11.glBegin(GL11.GL_LINES);
             GL11.glVertex2f(0, y);
             GL11.glVertex2f(width, y);
@@ -237,6 +229,7 @@ public class Main {
         }
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        menu.render();
+        if (ShowMenu)
+            menu.render();
     }
 }

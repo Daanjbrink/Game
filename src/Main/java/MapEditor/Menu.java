@@ -27,8 +27,6 @@ public class Menu {
 
     public boolean update() {
 
-        Display.setTitle("X: " + Mouse.getX() + " Y: " + (Display.getHeight() - Mouse.getY()));
-
         if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 32)
                 && (Display.getHeight() - Mouse.getY()) > 0 && (Display.getHeight() - Mouse.getY()) < 24) {
             HoverMenu = 0;

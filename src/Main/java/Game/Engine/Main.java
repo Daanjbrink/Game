@@ -63,11 +63,6 @@ public class Main {
 
     private void GameLoop() {
         while (!Display.isCloseRequested()) {
-            try {
-                Thread.sleep(3);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
 
@@ -88,7 +83,6 @@ public class Main {
             }
 
             Display.update();
-            Display.sync(60);
         }
         Display.destroy();
     }

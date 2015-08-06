@@ -27,15 +27,17 @@ public class Menu {
 
     public boolean update() {
 
+        Display.setTitle("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " camY: " + main.camY + " camY + 24 " + (main.camY + 24));
+
         if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 32)
-                && (Display.getHeight() - Mouse.getY()) > 0 && (Display.getHeight() - Mouse.getY()) < 24) {
+                && (Display.getHeight() - Mouse.getY()) > (main.camY) && (Display.getHeight() - Mouse.getY()) < (main.camY + 24)) {
             HoverMenu = 0;
             if (Mouse.isButtonDown(0)) {
                 ShowMenu = 0;
                 return true;
             }
         } else if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 48)
-                && (main.height - Mouse.getY()) > 24 && (main.height - Mouse.getY()) < 48 && ShowMenu == 0) {
+                && (Display.getHeight() - Mouse.getY()) > (main.camY + 24) && (Display.getHeight() - Mouse.getY()) < (main.camY + 48) && ShowMenu == 0) {
             HoverMenu = 1;
             if (Mouse.isButtonDown(0)) {
                 try {
@@ -47,13 +49,13 @@ public class Menu {
                 }
             }
         } else if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 48)
-                && (main.height - Mouse.getY()) > 48 && (main.height - Mouse.getY()) < 72 && ShowMenu == 0) {
+                && (Display.getHeight() - Mouse.getY()) > (main.camY + 48) && (Display.getHeight() - Mouse.getY()) < (main.camY + 72) && ShowMenu == 0) {
             HoverMenu = 2;
             if (Mouse.isButtonDown(0)) {
                 func.Import();
             }
         } else if (Mouse.getX() > main.camX && Mouse.getX() < (main.camX + 48)
-                && (main.height - Mouse.getY()) > 72 && (main.height - Mouse.getY()) < 96 && ShowMenu == 0) {
+                && (Display.getHeight() - Mouse.getY()) > (main.camY + 72) && (Display.getHeight() - Mouse.getY()) < (main.camY + 96) && ShowMenu == 0) {
             HoverMenu = 3;
             if (Mouse.isButtonDown(0)) {
                 func.Export();
@@ -107,13 +109,9 @@ public class Menu {
                 GL11.glEnable(GL11.GL_TEXTURE_2D);
                 font.drawString(main.camX + 3, main.camY + 50, "Import");
                 font.drawString(main.camX + 3, main.camY + 74, "Export");
-                new Draw().DrawRect(0, main.camY + 24, 48, 72, new byte[]{(byte) 0, (byte) 0, (byte) 0});
+                new Draw().DrawRect(main.camX, main.camY + 24, 48, 72, new byte[]{(byte) 0, (byte) 0, (byte) 0});
                 break;
         }
-
-        /*g.setColor(Color.black);
-        g.setFont(font);
-        g.drawString("File", 5, 2);*/
 
         font.drawString(main.camX + 5, main.camY + 2, "File");
     }

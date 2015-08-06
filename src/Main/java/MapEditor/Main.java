@@ -54,41 +54,36 @@ public class Main {
     }
 
     public static void main(String[] args) {
+        Display.setVSyncEnabled(true);
+        Display.setTitle("MapEditor");
         if (args.length == 0) {
             try {
                 Display.setDisplayMode(new DisplayMode(640, 480));
-                Display.setVSyncEnabled(true);
-                Display.setTitle("MapEditor");
                 Display.create();
-
-                new Main(640, 480, false);
+                new Main(1000, 1000, false);
+                return;
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (args.length == 2) {
             try {
                 Display.setDisplayMode(new DisplayMode(640, 480));
-                Display.setVSyncEnabled(true);
-                Display.setTitle("MapEditor");
-                Display.create();
-
                 new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]), false);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         } else if (args.length == 3) {
-            //if(args[0] == "-Import"){
             try {
                 Display.setDisplayMode(new DisplayMode(640, 480));
-                Display.setVSyncEnabled(true);
-                Display.setTitle("MapEditor");
-                Display.create();
-
                 new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]), true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            //}
+        }
+        try {
+            Display.create();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
 
@@ -126,11 +121,6 @@ public class Main {
 
     private void GameLoop() {
         while (!Display.isCloseRequested()) {
-            try {
-                Thread.sleep(3);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
 
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
 
@@ -144,7 +134,6 @@ public class Main {
             GL11.glPopMatrix();
 
             Display.update();
-            Display.sync(60);
         }
         Display.destroy();
     }
@@ -203,6 +192,8 @@ public class Main {
             menu.ShowMenu = -1;
             place.click(3);
         }
+
+        Functions.updateFPS();
     }
 
     public void render() {
@@ -221,7 +212,7 @@ public class Main {
             GL11.glVertex2f(x, 0);
             GL11.glEnd();
         }
-        for (y = 0; y <= height; y += 32) {
+        for (y = 32; y <= height; y += 32) {
             GL11.glBegin(GL11.GL_LINES);
             GL11.glVertex2f(0, y);
             GL11.glVertex2f(width, y);

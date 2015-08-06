@@ -1,10 +1,28 @@
 package MapEditor;
 
+import org.lwjgl.Sys;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Functions {
+
+    private static int fps;
+    private static long lastFPS = getTime();
+
+    public static void updateFPS() {
+        if (getTime() - lastFPS > 1000) {
+            System.out.println("FPS: " + fps);
+            fps = 0;
+            lastFPS += 1000;
+        }
+        fps++;
+    }
+
+    private static long getTime() {
+        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+    }
 
     public void New(int width, int height) {
         try {

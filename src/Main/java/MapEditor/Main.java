@@ -198,7 +198,7 @@ public class Main {
 
     public void render() {
 
-        new Draw().FillRect(0, 0, width, height, new byte[]{(byte) 255, (byte) 255, (byte) 255});
+        Draw.FillRect(0, 0, width, height, new byte[]{(byte) 255, (byte) 255, (byte) 255});
 
         handler.render();
         place.render();

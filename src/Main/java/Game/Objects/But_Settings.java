@@ -28,7 +28,7 @@ public class But_Settings extends Object {
     }
 
     public void render() {
-        new Draw().Draw(x, y, img);
+        Draw.Draw(x, y, img);
     }
 
     public void renderMP() {

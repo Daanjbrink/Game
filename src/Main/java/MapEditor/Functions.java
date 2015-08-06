@@ -13,7 +13,7 @@ public class Functions {
 
     public static void updateFPS() {
         if (getTime() - lastFPS > 1000) {
-            System.out.println("FPS: " + fps);
+            //Display.setTitle("FPS: " + fps);
             fps = 0;
             lastFPS += 1000;
         }

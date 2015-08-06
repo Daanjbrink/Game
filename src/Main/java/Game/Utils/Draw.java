@@ -6,7 +6,7 @@ import org.newdawn.slick.opengl.Texture;
 
 public class Draw {
 
-    public void Draw(int x, int y, Texture img) {
+    public static void Draw(int x, int y, Texture img) {
         Color.white.bind();
         img.bind();
 
@@ -25,7 +25,7 @@ public class Draw {
         GL11.glEnd();
     }
 
-    public void FillRect(int x, int y, int width, int height, byte[] color) {
+    public static void FillRect(int x, int y, int width, int height, byte[] color) {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
 
         GL11.glColor3ub(color[0], color[1], color[2]);
@@ -40,7 +40,7 @@ public class Draw {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
     }
 
-    public void DrawRect(int x, int y, int width, int height, byte[] color) {
+    public static void DrawRect(int x, int y, int width, int height, byte[] color) {
         GL11.glDisable(GL11.GL_TEXTURE_2D);
 
         GL11.glColor3ub(color[0], color[1], color[2]);

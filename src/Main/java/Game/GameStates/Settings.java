@@ -39,7 +39,7 @@ public class Settings extends GameState {
     }
 
     public void render() {
-        new Draw().Draw(0, 0, background);
+        Draw.Draw(0, 0, background);
         for (int i = 0; i < handler.objects.size(); i++) {
             handler.objects.get(i).render();
         }

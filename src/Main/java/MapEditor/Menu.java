@@ -146,7 +146,7 @@ public class Menu {
         //0 = File
         switch (ShowMenu) {
             case 0:
-                font.drawString(main.camX + 3, main.camY + 26, "New...");
+                font.drawString(main.camX + 3, main.camY + 29, "New...");
                 GL11.glDisable(GL11.GL_TEXTURE_2D);
                 GL11.glColor3d(0, 0, 0);
                 GL11.glBegin(GL11.GL_LINES);

@@ -55,11 +55,14 @@ public abstract class Object {
 
     public int getID() {
         return this.id;
-
     }
 
     public void setID(int id) {
         this.id = id;
+    }
+
+    public Class getType() {
+        return this.getClass();
     }
 
 }

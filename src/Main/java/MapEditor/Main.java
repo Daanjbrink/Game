@@ -1,5 +1,6 @@
 package MapEditor;
 
+import Game.Objects.Wall;
 import Game.Utils.Draw;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -40,7 +41,7 @@ public class Main {
 
         handler = new ObjectHandler(this);
         place = new Place(this, handler);
-        menu = new Menu(this, new Functions());
+        menu = new Menu(this, new Functions(this, handler));
 
         new Loader(this, handler).init();
 
@@ -55,7 +56,7 @@ public class Main {
             try {
                 Display.setDisplayMode(new DisplayMode(640, 480));
                 Display.create();
-                new Main(1000, 1000, false);
+                new Main(640, 480, false);
                 return;
             } catch (Exception e) {
                 e.printStackTrace();
@@ -63,6 +64,7 @@ public class Main {
         } else if (args.length == 2) {
             try {
                 Display.setDisplayMode(new DisplayMode(640, 480));
+                Display.create();
                 new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]), false);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -70,15 +72,11 @@ public class Main {
         } else if (args.length == 3) {
             try {
                 Display.setDisplayMode(new DisplayMode(640, 480));
-                new Main(Integer.parseInt(args[0]), Integer.parseInt(args[1]), true);
+                Display.create();
+                new Main(Integer.parseInt(args[1]), Integer.parseInt(args[2]), true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        try {
-            Display.create();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 
@@ -103,7 +101,7 @@ public class Main {
 
                     switch (tmp[2]) {
                         case "Wall":
-                            //handler.addObject(new Wall(x, y));
+                            handler.addObject(new Wall(x, y, handler.manager));
                             break;
                     }
                 }
@@ -116,6 +114,8 @@ public class Main {
 
     private void GameLoop() {
         while (!Display.isCloseRequested()) {
+
+            Display.setTitle("Mouse X: " + Mouse.getX() + " Mouse Y: " + (Display.getHeight() - Mouse.getY()) + " camX:" + camX + " camY: " + camY);
 
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
 
@@ -166,7 +166,7 @@ public class Main {
         camX += (keys[3] - keys[1]);
         camY += (keys[2] - keys[0]);
 
-        if (camX > (width - Display.getWidth()))
+        if (camX >= (width - Display.getWidth()))
             camX = (width - Display.getWidth());
         if (camX < 0)
             camX = 0;
@@ -179,24 +179,12 @@ public class Main {
             if (menu.update())
                 return;
 
-        while (Mouse.next()) {
-            if (Mouse.getEventButtonState()) {
-                //null
-            } else {
-                if (Mouse.getEventButton() == 0) {
-                    menu.ShowMenu = -1;
-                    place.click(0);
-                } else if (Mouse.getEventButton() == 1) {
-                    menu.ShowMenu = -1;
-                    place.click(1);
-                }
-            }
-            //To prevent place.click() is executed twice
-            try {
-                Thread.sleep(2);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if (Mouse.isButtonDown(0)) {
+            menu.ShowMenu = -1;
+            place.click(0);
+        } else if (Mouse.isButtonDown(1)) {
+            menu.ShowMenu = -1;
+            place.click(1);
         }
 
         Functions.updateFPS();

@@ -2,8 +2,6 @@ package MapEditor;
 
 import Game.Engine.Object;
 import Game.Objects.Wall;
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.Display;
 
 public class Place {
 
@@ -89,7 +87,6 @@ public class Place {
         if (handler.State == 0) return;
 
         if (handler.State == 1) {
-            Display.setTitle("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " mX: " + mX + " mY: " + mY);
             try {
                 switch (handler.type) {
                     case Wall:

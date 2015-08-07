@@ -169,12 +169,12 @@ public class Main {
         camX += (keys[3] - keys[1]);
         camY += (keys[2] - keys[0]);
 
-        if (camX > (width - 640))
-            camX = (width - 640);
+        if (camX > (width - Display.getWidth()))
+            camX = (width - Display.getWidth());
         if (camX < 0)
             camX = 0;
-        if (camY >= (height - 480))
-            camY = (height - 480);
+        if (camY >= (height - Display.getHeight()))
+            camY = (height - Display.getHeight());
         if (camY < 0)
             camY = 0;
 

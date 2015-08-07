@@ -30,6 +30,7 @@ public class Menu {
 
     public boolean update() {
 
+        //File menu
         if (Mouse.getX() > 0 && Mouse.getX() < 32
                 && (Display.getHeight() - Mouse.getY()) > 0 && (Display.getHeight() - Mouse.getY()) < 24) {
             HoverMenu = 0;
@@ -61,7 +62,9 @@ public class Menu {
             if (Mouse.isButtonDown(0)) {
                 func.Export();
             }
-        } else if (Mouse.getX() > 32 && Mouse.getX() < 64
+        }
+        //View menu
+        else if (Mouse.getX() > 32 && Mouse.getX() < 64
                 && (Display.getHeight() - Mouse.getY()) > 0 && (Display.getHeight() - Mouse.getY()) < 24) {
             HoverMenu = 4;
             if (Mouse.isButtonDown(0)) {
@@ -73,6 +76,7 @@ public class Menu {
             HoverMenu = 5;
             if (Mouse.isButtonDown(0)) {
                 try {
+                    ShowMenu = -1;
                     int width = Integer.parseInt(JOptionPane.showInputDialog(null, "Width", "View", JOptionPane.PLAIN_MESSAGE));
                     int height = Integer.parseInt(JOptionPane.showInputDialog(null, "Height", "View", JOptionPane.PLAIN_MESSAGE));
 

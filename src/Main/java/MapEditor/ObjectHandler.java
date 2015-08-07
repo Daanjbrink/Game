@@ -1,10 +1,17 @@
 package MapEditor;
 
 import Game.Engine.Object;
+import Game.Utils.AssetManager;
 
 import java.util.LinkedList;
 
 public class ObjectHandler {
+
+    public final String[] assets = {
+            "Wall/Wall 1.png"
+    };
+
+    public AssetManager manager;
 
     public boolean[][] area;
     LinkedList<Object> objects = new LinkedList<>();
@@ -19,6 +26,8 @@ public class ObjectHandler {
 
     public ObjectHandler(Main main) {
         this.area = new boolean[(int) Math.floor(main.width / 32) * 32 + 16][(int) Math.floor(main.height / 32) * 32 + 16];
+
+        this.manager = new AssetManager();
 
         count = 0;
     }

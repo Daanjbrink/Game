@@ -1,19 +1,26 @@
 package MapEditor;
 
 import Game.Engine.Object;
+import Game.Objects.Wall;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 
 public class Place {
 
     public int mX, mY;
+
+    private Main main;
     private ObjectHandler handler;
 
-    public Place(ObjectHandler handler) {
+    public Place(Main main, ObjectHandler handler) {
+        this.main = main;
         this.handler = handler;
     }
 
     public void Move(int x, int y) {
-        this.mX = (int) Math.floor(x / 32) * 32 + 16 + 16;
-        this.mY = (int) Math.floor(y / 32) * 32 + 16 + 8;
+
+        this.mX = Math.round((x + main.camX) / 32) * 32;
+        this.mY = Math.round((y + main.camY) / 32) * 32;
 
         if (handler.State == 2) {
             handler.Selected.setX(mX);
@@ -22,48 +29,40 @@ public class Place {
     }
 
     public void click(int button) {
-        //1 = left mouse button
-        //2 = middle mouse button
-        //3 = right mouse button
-        if (button == 1) {
+        System.err.println("CLick");
+        //0 = left mouse button
+        //1 = right mouse button
+        if (button == 0) {
             if (handler.State == 0) {
                 for (int i = 0; i < handler.objects.size(); i++) {
                     Object tmp = handler.objects.get(i);
                     if (tmp.getX() == mX && tmp.getY() == mY) {
+                        System.err.println("    selected existing: state 2");
                         handler.Selected = tmp;
                         handler.area[mX][mY] = false;
                         handler.State = 2;
                     }
                 }
             } else if (handler.State == 1) {
-                System.out.println(mX + " " + mY);
                 if (!PlaceFree(mX, mY)) return;
                 switch (handler.type) {
                     case Wall:
+                        System.err.println("    created new: state 1");
                         handler.area[mX][mY] = true;
-                        //handler.addObject(new Wall(mX, mY));
+                        handler.addObject(new Wall(mX, mY, handler.manager));
                         break;
                 }
+                return;
             } else if (handler.State == 2) {
                 if (!PlaceFree(mX, mY)) return;
+                System.err.println("    moved existing: state 0");
                 handler.area[mX][mY] = true;
                 handler.Selected = null;
                 handler.State = 0;
             }
         }
 
-        if (button == 2) {
-            if (handler.State == 0) {
-                for (int i = 0; i < handler.objects.size(); i++) {
-                    Object tmp = handler.objects.get(i);
-                    if (tmp.getX() == mX && tmp.getY() == mY) {
-                        System.out.println("Selected object id: " + tmp.getID());
-                    }
-                }
-            }
-        }
-
-        if (button == 3) {
+        if (button == 1) {
             if (handler.State == 0) {
                 if (PlaceFree(mX, mY)) return;
                 for (int i = 0; i < handler.objects.size(); i++) {
@@ -83,25 +82,21 @@ public class Place {
     }
 
     public boolean PlaceFree(int x, int y) {
-        try {
-            return !handler.area[x][y];
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return false;
+        return !handler.area[x][y];
     }
 
     public void render() {
         if (handler.State == 0) return;
 
         if (handler.State == 1) {
+            Display.setTitle("X: " + Mouse.getX() + " Y: " + Mouse.getY() + " mX: " + mX + " mY: " + mY);
             try {
                 switch (handler.type) {
                     case Wall:
-                        //Object tmp = new Wall(mX, mY);
-                        /*tmp.renderMP();
+                        Object tmp = new Wall(mX, mY, handler.manager);
                         tmp.setX(mX);
-                        tmp.setY(mY);*/
+                        tmp.setY(mY);
+                        tmp.renderMP();
                         break;
                 }
             } catch (Exception e) {

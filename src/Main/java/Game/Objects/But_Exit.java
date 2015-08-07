@@ -7,9 +7,8 @@ import org.lwjgl.input.Mouse;
 
 public class But_Exit extends Object {
 
+    private final String imgLoc = "Text/Exit.png";
     private Main main;
-
-    private String imgLoc = "Text/Exit.png";
 
     public But_Exit(int x, int y, Main main) {
         this.main = main;

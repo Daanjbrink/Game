@@ -8,9 +8,8 @@ import org.lwjgl.input.Mouse;
 
 public class But_Settings extends Object {
 
+    private final String imgLoc = "Text/Settings.png";
     private Main main;
-
-    private String imgLoc = "Text/Settings.png";
 
     public But_Settings(int x, int y, Main main) {
         this.main = main;

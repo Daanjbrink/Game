@@ -5,10 +5,11 @@ import org.lwjgl.opengl.GL11;
 public class Loader {
 
     private Main main;
+    private ObjectHandler handler;
 
-    public Loader(Main main) {
-
+    public Loader(Main main, ObjectHandler handler) {
         this.main = main;
+        this.handler = handler;
     }
 
     public void init() {
@@ -35,7 +36,7 @@ public class Loader {
 
     private void initTexture() {
         for (String str : main.assets) {
-            main.manager.loadPNG(str);
+            handler.manager.loadPNG(str);
         }
     }
 

@@ -1,6 +1,5 @@
 package MapEditor;
 
-import Game.Utils.AssetManager;
 import Game.Utils.Draw;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -22,8 +21,6 @@ public class Main {
     public int camY = 0;
     public int camSpd = 10;
 
-    public AssetManager manager;
-
     private int[] keys = new int[4];
 
     private ObjectHandler handler;
@@ -37,17 +34,15 @@ public class Main {
         this.width = width;
         this.height = height;
 
-        this.manager = new AssetManager();
-
         if (imported)
             this.Imported = true;
         ShowMenu = true;
 
         handler = new ObjectHandler(this);
-        place = new Place(handler);
+        place = new Place(this, handler);
         menu = new Menu(this, new Functions());
 
-        new Loader(this).init();
+        new Loader(this, handler).init();
 
         init();
         GameLoop();
@@ -139,12 +134,14 @@ public class Main {
     }
 
     public void update() {
-        place.Move(Mouse.getX(), Mouse.getY());
+        place.Move(Mouse.getX(), (Display.getHeight() - Mouse.getY()));
 
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
                 if (Keyboard.getEventKey() == Keyboard.KEY_LMENU)
                     ShowMenu = !ShowMenu;
+                if (Keyboard.getEventKey() == Keyboard.KEY_1)
+                    handler.State = 1;
 
                 if (Keyboard.getEventKey() == Keyboard.KEY_W)
                     keys[0] = camSpd;
@@ -182,15 +179,24 @@ public class Main {
             if (menu.update())
                 return;
 
-        if (Mouse.isButtonDown(0)) {
-            menu.ShowMenu = -1;
-            place.click(1);
-        } else if (Mouse.isButtonDown(1)) {
-            menu.ShowMenu = -1;
-            place.click(2);
-        } else if (Mouse.isButtonDown(2)) {
-            menu.ShowMenu = -1;
-            place.click(3);
+        while (Mouse.next()) {
+            if (Mouse.getEventButtonState()) {
+                //null
+            } else {
+                if (Mouse.getEventButton() == 0) {
+                    menu.ShowMenu = -1;
+                    place.click(0);
+                } else if (Mouse.getEventButton() == 1) {
+                    menu.ShowMenu = -1;
+                    place.click(1);
+                }
+            }
+            //To prevent place.click() is executed twice
+            try {
+                Thread.sleep(2);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
         Functions.updateFPS();

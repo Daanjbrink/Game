@@ -7,9 +7,8 @@ import org.lwjgl.input.Mouse;
 
 public class But_StartGame extends Object {
 
+    private final String imgLoc = "Text/Play.png";
     private Main main;
-
-    private String imgLoc = "Text/Play.png";
 
     public But_StartGame(int x, int y, Main main) {
         this.main = main;

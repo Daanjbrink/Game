@@ -2,6 +2,7 @@ package Game.GameStates;
 
 import Game.Engine.Main;
 import Game.Engine.ObjectHandler;
+import Game.Engine.Vars;
 import Game.Objects.But_Exit;
 import Game.Objects.But_Settings;
 import Game.Objects.But_StartGame;
@@ -33,7 +34,7 @@ public class Menu extends GameState {
 
     public void init() {
         try {
-            if (main.width != 640 || main.height != 480)
+            if (Vars.width != 640 || Vars.height != 480)
                 Display.setDisplayMode(new DisplayMode(640, 480));
         } catch (Exception e) {
             e.printStackTrace();

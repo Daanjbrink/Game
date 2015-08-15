@@ -9,10 +9,10 @@ import org.lwjgl.input.Mouse;
 public class But_Settings extends Object {
 
     private final String imgLoc = "Text/Settings.png";
-    private Main main;
+    //private Main main;
 
     public But_Settings(int x, int y, Main main) {
-        this.main = main;
+        setMain(main);
 
         this.x = x;
         this.y = y;
@@ -36,8 +36,7 @@ public class But_Settings extends Object {
 
     public void update() {
         if (Mouse.isButtonDown(0)) {
-            if (Mouse.getX() > x && Mouse.getX() < (x + img.getImageWidth())
-                    && (main.height - Mouse.getY()) > y && (main.height - Mouse.getY()) < (y + height)) {
+            if (isClicked()) {
                 main.enterState(States.Settings);
             }
         }

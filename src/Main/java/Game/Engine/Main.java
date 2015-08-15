@@ -9,7 +9,7 @@ import org.lwjgl.opengl.GL11;
 
 public class Main {
 
-    public int width, height;
+    //public int width, height;
 
     public AssetManager manager;
 
@@ -20,8 +20,10 @@ public class Main {
     private Settings settings;
 
     public Main(int width, int height) {
-        this.width = width;
-        this.height = height;
+        System.out.println("w: " + Vars.width + " h: " + Vars.height);
+        Vars.width = width;
+        Vars.height = height;
+        System.out.println("w: " + Vars.width + " h: " + Vars.height);
 
         manager = new AssetManager();
 

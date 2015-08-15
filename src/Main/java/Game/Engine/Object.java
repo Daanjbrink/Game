@@ -1,11 +1,13 @@
 package Game.Engine;
 
+import org.lwjgl.input.Mouse;
 import org.newdawn.slick.opengl.Texture;
 
 public abstract class Object {
 
     protected int x, y, velX, velY, width, height, id;
     protected Texture img;
+    protected Main main;
 
     public abstract void render();
 
@@ -61,8 +63,16 @@ public abstract class Object {
         this.id = id;
     }
 
-    public Class getType() {
-        return this.getClass();
+    public Object getType() {
+        return this;
     }
 
+    public boolean isClicked() {
+        return (Mouse.getX() > x && Mouse.getX() < (x + width)
+                && (Vars.height - Mouse.getY()) > y && (Vars.height - Mouse.getY()) < (y + height));
+    }
+
+    public void setMain(Main main) {
+        this.main = main;
+    }
 }

@@ -2,6 +2,7 @@ package Game.Objects;
 
 import Game.Engine.Main;
 import Game.Engine.Object;
+import Game.Engine.Vars;
 import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
 
@@ -36,7 +37,7 @@ public class But_StartGame extends Object {
     public void update() {
         if (Mouse.isButtonDown(0)) {
             if (Mouse.getX() > x && Mouse.getX() < (x + width)
-                    && (main.height - Mouse.getY()) > y && (main.height - Mouse.getY()) < (y + height)) {
+                    && (Vars.height - Mouse.getY()) > y && (Vars.height - Mouse.getY()) < (y + height)) {
                 System.out.println("Start");
             }
         }

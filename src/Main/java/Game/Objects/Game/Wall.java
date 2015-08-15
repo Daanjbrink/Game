@@ -1,20 +1,20 @@
-package Game.Objects;
+package Game.Objects.Game;
 
 import Game.Engine.Object;
-import Game.Utils.AssetManager;
+import Game.Engine.Vars;
 import Game.Utils.Draw;
 
-public class zSpawn extends Object {
+public class Wall extends Object {
 
-    private final String imgLoc = "Zombie/Other/SpawnPoint.png";
+    private final String imgLoc = "Wall/Wall 1.png";
 
-    public zSpawn(int x, int y, AssetManager manager) {
+    public Wall(int x, int y) {
 
         this.x = x;
         this.y = y;
 
         try {
-            this.img = manager.get(imgLoc);
+            this.img = Vars.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {

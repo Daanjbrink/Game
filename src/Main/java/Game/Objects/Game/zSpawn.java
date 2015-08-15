@@ -1,22 +1,20 @@
-package Game.Objects;
+package Game.Objects.Game;
 
-import Game.Engine.Main;
 import Game.Engine.Object;
+import Game.Engine.Vars;
 import Game.Utils.Draw;
-import org.lwjgl.input.Mouse;
 
-public class But_Exit extends Object {
+public class zSpawn extends Object {
 
-    private final String imgLoc = "Text/Exit.png";
+    private final String imgLoc = "Zombie/Other/SpawnPoint.png";
 
-    public But_Exit(int x, int y, Main main) {
-        setMain(main);
+    public zSpawn(int x, int y) {
 
         this.x = x;
         this.y = y;
 
         try {
-            this.img = main.manager.get(imgLoc);
+            this.img = Vars.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {
@@ -29,14 +27,10 @@ public class But_Exit extends Object {
     }
 
     public void renderMP() {
-
+        Draw.Draw(x, y, img);
     }
 
     public void update() {
-        if (Mouse.isButtonDown(0)) {
-            if (isClicked()) {
-                System.exit(0);
-            }
-        }
+
     }
 }

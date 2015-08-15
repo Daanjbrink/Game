@@ -6,6 +6,8 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.opengl.TextureLoader;
+import org.newdawn.slick.util.ResourceLoader;
 
 import javax.swing.*;
 import java.awt.*;
@@ -95,6 +97,27 @@ public class Menu {
                 }
                 return true;
             }
+        }
+        //Object select
+        else if (Mouse.getX() > 64 && Mouse.getX() < 96
+                && (Display.getHeight() - Mouse.getY()) > 0 && (Display.getHeight() - Mouse.getY()) < 24) {
+            HoverMenu = 6;
+            if (Mouse.isButtonDown(0)) {
+                ShowMenu = 2;
+                return true;
+            }
+        } else if (Mouse.getX() > 0 && Mouse.getX() < 32
+                && (Display.getHeight() - Mouse.getY()) > 24 && (Display.getHeight() - Mouse.getY()) < 56) {
+            if (Mouse.isButtonDown(0)) {
+                //main.handler.type = Types.Wall;
+                main.handler.State = 1;
+            }
+        } else if (Mouse.getX() > 32 && Mouse.getX() < 64
+                && (Display.getHeight() - Mouse.getY()) > 24 && (Display.getHeight() - Mouse.getY()) < 56) {
+            if (Mouse.isButtonDown(0)) {
+                //main.handler.type = Types.Spawn;
+                main.handler.State = 1;
+            }
         } else {
             HoverMenu = -1;
         }
@@ -110,6 +133,9 @@ public class Menu {
                 break;
             case 1:
                 Draw.FillRect(main.camX + 32, main.camY + 24, 48, 24, new byte[]{(byte) 190, (byte) 190, (byte) 190});
+                break;
+            case 2:
+                Draw.FillRect(main.camX, main.camY + 24, 128, 72, new byte[]{(byte) 185, (byte) 185, (byte) 185});
                 break;
         }
 
@@ -143,6 +169,13 @@ public class Menu {
                 break;
         }
 
+        //6 = Select
+        switch (HoverMenu) {
+            case 6:
+                Draw.FillRect(main.camX + 64, main.camY, 32, 24, new byte[]{(byte) 130, (byte) 130, (byte) 130});
+                break;
+        }
+
         //0 = File
         switch (ShowMenu) {
             case 0:
@@ -168,7 +201,21 @@ public class Menu {
                 break;
         }
 
+        //2 = Select
+        switch (ShowMenu) {
+            case 2:
+                try {
+                    Draw.Draw(main.camX, main.camY + 24, TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("Sprites/Wall/Wall 1.png")));
+                    Draw.Draw(main.camX + 32, main.camY + 24, TextureLoader.getTexture("PNG", ResourceLoader.getResourceAsStream("Sprites/Zombie/Other/SpawnPoint.png")));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                Draw.DrawRect(main.camX, main.camY + 24, 128, 72, new byte[]{(byte) 0, (byte) 0, (byte) 0});
+                break;
+        }
+
         font.drawString(main.camX + 5, main.camY + 4, "File");
         font.drawString(main.camX + 33, main.camY + 4, "View");
+        font.drawString(main.camX + 65, main.camY + 4, "Select");
     }
 }

@@ -9,8 +9,6 @@ import org.lwjgl.opengl.GL11;
 
 public class Main {
 
-    //public int width, height;
-
     public AssetManager manager;
 
     public States state;
@@ -20,16 +18,16 @@ public class Main {
     private Settings settings;
 
     public Main(int width, int height) {
-        System.out.println("w: " + Vars.width + " h: " + Vars.height);
+        Vars.main = this;
+
         Vars.width = width;
         Vars.height = height;
-        System.out.println("w: " + Vars.width + " h: " + Vars.height);
 
-        manager = new AssetManager();
+        Vars.manager = new AssetManager();
 
-        menu = new Menu(this);
-        settings = new Settings(this);
-        loader = new Loader(this, menu, settings);
+        menu = new Menu();
+        settings = new Settings();
+        loader = new Loader(menu, settings);
 
         this.enterState(States.Loading);
 

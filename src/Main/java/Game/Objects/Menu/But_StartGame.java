@@ -1,20 +1,20 @@
-package Game.Objects;
+package Game.Objects.Menu;
 
 import Game.Engine.Object;
-import Game.Utils.AssetManager;
+import Game.Engine.Vars;
 import Game.Utils.Draw;
+import org.lwjgl.input.Mouse;
 
-public class Wall extends Object {
+public class But_StartGame extends Object {
 
-    private final String imgLoc = "Wall/Wall 1.png";
+    private final String imgLoc = "Text/Play.png";
 
-    public Wall(int x, int y, AssetManager manager) {
-
+    public But_StartGame(int x, int y) {
         this.x = x;
         this.y = y;
 
         try {
-            this.img = manager.get(imgLoc);
+            this.img = Vars.manager.get(imgLoc);
             this.width = img.getImageWidth();
             this.height = img.getImageHeight();
         } catch (Exception e) {
@@ -27,10 +27,14 @@ public class Wall extends Object {
     }
 
     public void renderMP() {
-        Draw.Draw(x, y, img);
+
     }
 
     public void update() {
-
+        if (Mouse.isButtonDown(0)) {
+            if (isClicked()) {
+                System.out.println("Start");
+            }
+        }
     }
 }

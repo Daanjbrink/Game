@@ -7,7 +7,6 @@ public abstract class Object {
 
     protected int x, y, velX, velY, width, height, id;
     protected Texture img;
-    protected Main main;
 
     public abstract void render();
 
@@ -70,9 +69,5 @@ public abstract class Object {
     public boolean isClicked() {
         return (Mouse.getX() > x && Mouse.getX() < (x + width)
                 && (Vars.height - Mouse.getY()) > y && (Vars.height - Mouse.getY()) < (y + height));
-    }
-
-    public void setMain(Main main) {
-        this.main = main;
     }
 }

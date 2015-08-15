@@ -3,22 +3,18 @@ package Game.Engine;
 import Game.GameStates.Menu;
 import Game.GameStates.Settings;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
 import org.newdawn.slick.util.ResourceLoader;
 
 public class Loader {
 
-    private Main main;
     private Menu menu;
     private Settings settings;
 
     private Texture loadingTexture;
 
-    public Loader(Main main, Menu menu, Settings settings) {
-
-        this.main = main;
+    public Loader(Menu menu, Settings settings) {
         this.menu = menu;
         this.settings = settings;
 
@@ -30,7 +26,6 @@ public class Loader {
     }
 
     public void render() {
-        Color.white.bind();
         loadingTexture.bind();
 
         GL11.glBegin(GL11.GL_QUADS);
@@ -51,9 +46,8 @@ public class Loader {
     public void init() {
         initVideo();
         initTexture();
-        //initSound();
 
-        main.enterState(States.Menu);
+        Vars.main.enterState(States.Menu);
     }
 
     private void initVideo() {
@@ -65,7 +59,7 @@ public class Loader {
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
 
         GL11.glViewport(0, 0, Vars.width, Vars.height);
-        GL11.glMatrixMode(GL11.GL_MODELVIEW);
+        //GL11.glMatrixMode(GL11.GL_MODELVIEW);
 
         GL11.glMatrixMode(GL11.GL_PROJECTION);
         GL11.glLoadIdentity();
@@ -75,10 +69,10 @@ public class Loader {
 
     private void initTexture() {
         for (String str : menu.assets) {
-            main.manager.loadPNG(str);
+            Vars.manager.loadPNG(str);
         }
         for (String str : settings.assets) {
-            main.manager.loadPNG(str);
+            Vars.manager.loadPNG(str);
         }
     }
 }

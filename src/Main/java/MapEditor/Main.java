@@ -1,6 +1,6 @@
 package MapEditor;
 
-import Game.Objects.Wall;
+import Game.Objects.Game.Wall;
 import Game.Utils.Draw;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
@@ -14,17 +14,16 @@ import java.util.Scanner;
 public class Main {
 
     public final String[] assets = {
-            "Wall/Wall 1.png"
+            "Wall/Wall 1.png",
+            "Zombie/Other/SpawnPoint.png"
     };
 
     public int width, height;
     public int camX = 0;
     public int camY = 0;
     public int camSpd = 10;
-
+    public ObjectHandler handler;
     private int[] keys = new int[4];
-
-    private ObjectHandler handler;
     private Place place;
     private Menu menu;
 
@@ -101,7 +100,7 @@ public class Main {
 
                     switch (tmp[2]) {
                         case "Wall":
-                            handler.addObject(new Wall(x, y, handler.manager));
+                            handler.addObject(new Wall(x, y));
                             break;
                     }
                 }

@@ -1,7 +1,6 @@
 package MapEditor;
 
 import Game.Engine.Object;
-import Game.Objects.Wall;
 
 public class Place {
 
@@ -35,7 +34,6 @@ public class Place {
                 for (int i = 0; i < handler.objects.size(); i++) {
                     Object tmp = handler.objects.get(i);
                     if (tmp.getX() == mX && tmp.getY() == mY) {
-                        System.err.println("    selected existing: state 2");
                         handler.Selected = tmp;
                         handler.area[mX][mY] = false;
                         handler.State = 2;
@@ -43,17 +41,19 @@ public class Place {
                 }
             } else if (handler.State == 1) {
                 if (!PlaceFree(mX, mY)) return;
-                switch (handler.type) {
+                /*switch (handler.type) {
                     case Wall:
-                        System.err.println("    created new: state 1");
                         handler.area[mX][mY] = true;
                         handler.addObject(new Wall(mX, mY, handler.manager));
                         break;
-                }
+                    case Spawn:
+                        handler.area[mX][mY] = true;
+                        handler.addObject(new zSpawn(mX, mY, handler.manager));
+                        break;
+                }*/
                 return;
             } else if (handler.State == 2) {
                 if (!PlaceFree(mX, mY)) return;
-                System.err.println("    moved existing: state 0");
                 handler.area[mX][mY] = true;
                 handler.Selected = null;
                 handler.State = 0;
@@ -88,14 +88,25 @@ public class Place {
 
         if (handler.State == 1) {
             try {
+                /*Class[] cArg = new Class[3];
+                cArg[0] = int.class;
+                cArg[1] = int.class;
+                cArg[2] = AssetManager.class;
+                java.lang.Object tmp = handler.type.getDeclaredConstructor().newInstance();
                 switch (handler.type) {
                     case Wall:
-                        Object tmp = new Wall(mX, mY, handler.manager);
+                        //tmp = new Wall(mX, mY, handler.manager);
                         tmp.setX(mX);
                         tmp.setY(mY);
                         tmp.renderMP();
                         break;
-                }
+                    case Spawn:
+                        //tmp = new zSpawn(mX, mY, handler.manager);
+                        tmp.setX(mX);
+                        tmp.setY(mY);
+                        tmp.renderMP();
+                        break;
+                }*/
             } catch (Exception e) {
                 e.printStackTrace();
             }

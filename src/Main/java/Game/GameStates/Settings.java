@@ -1,6 +1,5 @@
 package Game.GameStates;
 
-import Game.Engine.Main;
 import Game.Engine.ObjectHandler;
 import Game.Engine.Vars;
 import Game.Utils.Draw;
@@ -11,17 +10,15 @@ import org.newdawn.slick.opengl.Texture;
 public class Settings extends GameState {
 
     final public String[] assets = {
-            "Other/Menu.png"
+            "Other/Menu.png",
+            "Text/Fullscreen.png"
     };
-
-    private Main main;
 
     private ObjectHandler handler;
 
     private Texture background;
 
-    public Settings(Main main) {
-        this.main = main;
+    public Settings() {
 
         this.handler = new ObjectHandler();
     }
@@ -34,7 +31,7 @@ public class Settings extends GameState {
             e.printStackTrace();
         }
 
-        background = main.manager.get("Other/Menu.png");
+        background = Vars.manager.get("Other/Menu.png");
 
         // Add buttons
     }

@@ -21,7 +21,7 @@ public class ObjectHandler {
     //2=move
     int State = 0;
     Object Selected = null;
-    Types type = Types.Wall;
+    //Object type = zSpawn.class.getSuperclass();
     int count;
 
     public ObjectHandler(Main main) {

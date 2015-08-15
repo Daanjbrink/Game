@@ -1,11 +1,10 @@
 package Game.GameStates;
 
-import Game.Engine.Main;
 import Game.Engine.ObjectHandler;
 import Game.Engine.Vars;
-import Game.Objects.But_Exit;
-import Game.Objects.But_Settings;
-import Game.Objects.But_StartGame;
+import Game.Objects.Menu.But_Exit;
+import Game.Objects.Menu.But_Settings;
+import Game.Objects.Menu.But_StartGame;
 import Game.Utils.Draw;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -20,15 +19,11 @@ public class Menu extends GameState {
             "Text/Exit.png"
     };
 
-    private Main main;
-
     private ObjectHandler handler;
 
     private Texture background;
 
-    public Menu(Main main) {
-        this.main = main;
-
+    public Menu() {
         this.handler = new ObjectHandler();
     }
 
@@ -40,12 +35,12 @@ public class Menu extends GameState {
             e.printStackTrace();
         }
 
-        background = main.manager.get("Other/Menu.png");
+        background = Vars.manager.get("Other/Menu.png");
 
         // Add buttons
-        handler.addObject(new But_StartGame(8, 250, main));
-        handler.addObject(new But_Settings(8, 280, main));
-        handler.addObject(new But_Exit(8, 310, main));
+        handler.addObject(new But_StartGame(8, 250));
+        handler.addObject(new But_Settings(8, 280));
+        handler.addObject(new But_Exit(8, 310));
     }
 
     public void render() {

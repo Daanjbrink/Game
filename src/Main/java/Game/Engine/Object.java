@@ -10,8 +10,6 @@ public abstract class Object {
 
     public abstract void render();
 
-    public abstract void renderMP();
-
     public abstract void update();
 
     public int getX() {

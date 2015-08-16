@@ -26,10 +26,6 @@ public class But_Exit extends Object {
         Draw.Draw(x, y, img);
     }
 
-    public void renderMP() {
-
-    }
-
     public void update() {
         if (Mouse.isButtonDown(0)) {
             if (isClicked()) {

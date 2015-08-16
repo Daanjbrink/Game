@@ -25,9 +25,6 @@ public class Text_Fullscreen extends Object {
         Draw.Draw(x, y, img);
     }
 
-    public void renderMP() {
-    }
-
     public void update() {
     }
 }

@@ -35,7 +35,7 @@ public class ObjectHandler {
     public void render() {
         for (int i = 0; i < objects.size(); i++) {
             Object tmp = objects.get(i);
-            tmp.renderMP();
+            tmp.render();
         }
     }
 

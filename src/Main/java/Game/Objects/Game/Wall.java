@@ -26,10 +26,6 @@ public class Wall extends Object {
         Draw.Draw(x, y, img);
     }
 
-    public void renderMP() {
-        Draw.Draw(x, y, img);
-    }
-
     public void update() {
 
     }

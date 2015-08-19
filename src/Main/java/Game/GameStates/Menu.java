@@ -37,7 +37,7 @@ public class Menu extends GameState {
 
         background = Vars.manager.get("Other/Menu.png");
 
-        // Add buttons
+        // Add objects
         handler.addObject(new But_StartGame(8, 250));
         handler.addObject(new But_Settings(8, 280));
         handler.addObject(new But_Exit(8, 310));

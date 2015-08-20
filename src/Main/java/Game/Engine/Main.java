@@ -1,5 +1,7 @@
 package Game.Engine;
 
+import Game.GameStates.Game;
+import Game.GameStates.GameState;
 import Game.GameStates.Menu;
 import Game.GameStates.Settings;
 import Game.Utils.AssetManager;
@@ -13,9 +15,7 @@ public class Main {
 
     public States state;
 
-    private Loader loader;
-    private Menu menu;
-    private Settings settings;
+    private GameState room;
 
     public Main(int width, int height) {
         Vars.main = this;
@@ -25,13 +25,9 @@ public class Main {
 
         Vars.manager = new AssetManager();
 
-        menu = new Menu();
-        settings = new Settings();
-        loader = new Loader(menu, settings);
-
         this.enterState(States.Loading);
 
-        loader.init();
+        Loader.init();
 
         GameLoop();
     }
@@ -53,10 +49,16 @@ public class Main {
         this.state = state;
         switch (state) {
             case Menu:
-                menu.init();
+                room = new Menu();
+                room.init();
                 break;
             case Settings:
-                settings.init();
+                room = new Settings();
+                room.init();
+                break;
+            case Game:
+                room = new Game();
+                room.init();
                 break;
         }
     }
@@ -66,21 +68,8 @@ public class Main {
 
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
 
-            switch (state) {
-                case Loading:
-                    loader.render();
-                    break;
-
-                case Menu:
-                    menu.update();
-                    menu.render();
-                    break;
-
-                case Settings:
-                    settings.update();
-                    settings.render();
-                    break;
-            }
+            room.update();
+            room.render();
 
             Display.update();
         }

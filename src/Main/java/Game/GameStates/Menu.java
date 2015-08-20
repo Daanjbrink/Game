@@ -1,5 +1,6 @@
 package Game.GameStates;
 
+import Game.Engine.Loader;
 import Game.Engine.ObjectHandler;
 import Game.Engine.Vars;
 import Game.Objects.Menu.But_Exit;
@@ -34,6 +35,8 @@ public class Menu extends GameState {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        Loader.loadSprites(assets);
 
         background = Vars.manager.get("Other/Menu.png");
 

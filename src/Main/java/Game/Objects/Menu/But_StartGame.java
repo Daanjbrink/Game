@@ -1,6 +1,7 @@
 package Game.Objects.Menu;
 
 import Game.Engine.Object;
+import Game.Engine.States;
 import Game.Engine.Vars;
 import Game.Utils.Draw;
 import org.lwjgl.input.Mouse;
@@ -29,7 +30,7 @@ public class But_StartGame extends Object {
     public void update() {
         if (Mouse.isButtonDown(0)) {
             if (isClicked()) {
-                System.out.println("Start");
+                Vars.main.enterState(States.Game);
             }
         }
     }

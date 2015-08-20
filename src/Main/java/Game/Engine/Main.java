@@ -66,10 +66,17 @@ public class Main {
     private void GameLoop() {
         while (!Display.isCloseRequested()) {
 
-            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BITS);
+            GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+
+            /*if(this.state == States.Game) {
+                GL11.glPushMatrix();
+            }*/
 
             room.update();
             room.render();
+
+            /*if(this.state == States.Game)
+                GL11.glPopMatrix();*/
 
             Display.update();
         }

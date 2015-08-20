@@ -21,7 +21,7 @@ public class Loader {
     private static void initVideo() {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-        GL11.glClearColor(255.0f, 255.0f, 255.0f, 255.0f);
+        GL11.glClearColor(0, 0, 0, 0);
 
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);

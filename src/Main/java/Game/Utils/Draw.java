@@ -1,12 +1,13 @@
 package Game.Utils;
 
+import Game.Engine.Object;
 import Game.Engine.Vars;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
 
 public class Draw {
 
-    public static void Draw(int x, int y, Texture img) {
+    public static void Draw(float x, float y, Texture img) {
         img.bind();
 
         GL11.glBegin(GL11.GL_QUADS);
@@ -62,12 +63,38 @@ public class Draw {
         }
     }
 
-    public static void DrawRotated(int x, int y, Texture img, int angle) {
+    public static void DrawObject(Object object) {
+        GL11.glPushMatrix();
+
+        GL11.glTranslatef(object.getX() + object.getWidth() / 2, object.getY() + object.getHeight() / 2, 0);
+        GL11.glRotatef(object.getAngle(), 0, 0, 1);
+        GL11.glScalef(object.getScaleX(), object.getScaleY(), 0);
+        GL11.glTranslatef(-object.getX() - object.getWidth() / 2, -object.getY() - object.getHeight() / 2, 0);
+
+        object.getImg().bind();
+        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glTexCoord2f(0, 0);
+        GL11.glVertex2f(object.getX(), object.getY());
+
+        GL11.glTexCoord2f(1, 0);
+        GL11.glVertex2f(object.getX() + object.getWidth(), object.getY());
+
+        GL11.glTexCoord2f(1, 1);
+        GL11.glVertex2f(object.getX() + object.getWidth(), object.getY() + object.getHeight());
+
+        GL11.glTexCoord2f(0, 1);
+        GL11.glVertex2f(object.getX(), object.getY() + object.getHeight());
+        GL11.glEnd();
+
+        GL11.glPopMatrix();
+    }
+
+    public static void DrawRotated(float x, float y, Texture img, int angle) {
         GL11.glPushMatrix();
 
         GL11.glTranslatef(x + img.getTextureWidth() / 2, y + img.getTextureHeight() / 2, 0);
         GL11.glRotatef(angle, 0, 0, 1);
-        GL11.glTranslatef(-x - img.getTextureWidth() / 2, -y - img.getTextureHeight() / 2, 0);
+        GL11.glTranslatef(-x + img.getTextureWidth() / 2, -y + img.getTextureHeight() / 2, 0);
 
         img.bind();
         GL11.glBegin(GL11.GL_QUADS);
@@ -124,4 +151,21 @@ public class Draw {
         GL11.glEnable(GL11.GL_TEXTURE_2D);
     }
 
+    public static void DrawLine(int x, int y, int x2, int y2) {
+        GL11.glPushMatrix();
+
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+
+        GL11.glColor3f(0, 0, 0);
+        GL11.glBegin(GL11.GL_LINE_STRIP);
+
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x2, y2);
+
+        GL11.glEnd();
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+        GL11.glPopMatrix();
+    }
 }

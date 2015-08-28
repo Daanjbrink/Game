@@ -68,15 +68,8 @@ public class Main {
 
             GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
 
-            /*if(this.state == States.Game) {
-                GL11.glPushMatrix();
-            }*/
-
             room.update();
             room.render();
-
-            /*if(this.state == States.Game)
-                GL11.glPopMatrix();*/
 
             Display.update();
         }

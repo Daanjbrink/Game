@@ -14,7 +14,9 @@ public class Game extends GameState {
 
     final public String[] assets = {
             "Text/Ground.png",
-            "Characters/Character 1/Character 1 phase 1.png"
+            "Characters/Character 1/Character 1 phase 1.png",
+            "Other/Bullet.png",
+            "Wall/Wall 1.png"
     };
     private int camX = 0, camY = 0;
     private ObjectHandler handler;
@@ -38,7 +40,7 @@ public class Game extends GameState {
         background = Vars.manager.get("Text/Ground.png");
 
         // Add objects
-        handler.addObject(new Player(32, 32));
+        handler.addObject(new Player(32, 32, handler));
     }
 
     public void render() {

@@ -1,6 +1,7 @@
 package Game.Objects.Game;
 
 import Game.Engine.Object;
+import Game.Engine.ObjectHandler;
 import Game.Engine.Vars;
 import Game.Utils.Draw;
 import org.lwjgl.input.Keyboard;
@@ -8,12 +9,18 @@ import org.lwjgl.input.Keyboard;
 public class Player extends Object {
 
     private final String imgLoc = "Characters/Character 1/Character 1 phase 1.png";
+    //private final String imgLoc = "Wall/Wall 1.png";
 
-    private boolean[] keyDown = new boolean[4];
+    private byte keys;
+    private int spd = 2;
 
-    private int angle;
+    private int dx, dy;
 
-    public Player(int x, int y) {
+    private ObjectHandler handler;
+
+    public Player(int x, int y, ObjectHandler handler) {
+
+        this.handler = handler;
 
         this.x = x;
         this.y = y;
@@ -28,46 +35,98 @@ public class Player extends Object {
     }
 
     public void render() {
-        Draw.DrawRotated(x, y, img, angle);
+        Draw.DrawObject(this);
     }
 
     public void update() {
+        dx = 0;
+        dy = 0;
+
+        boolean shoot = false;
+
         while (Keyboard.next()) {
             if (Keyboard.getEventKeyState()) {
                 if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-                    this.setVelY(-2);
-                    keyDown[0] = true;
-                    angle = 0;
+                    keys ^= 1;
+                    dy--;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_A) {
-                    this.setVelX(-2);
-                    keyDown[1] = true;
-                    angle = 270;
+                    keys ^= 2;
+                    dx--;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-                    this.setVelY(2);
-                    keyDown[2] = true;
-                    angle = 180;
+                    keys ^= 4;
+                    dy++;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_D) {
-                    this.setVelX(2);
-                    keyDown[3] = true;
-                    angle = 90;
+                    keys ^= 8;
+                    dx++;
+                } else if (Keyboard.getEventKey() == Keyboard.KEY_LSHIFT) {
+                    spd = 5;
                 }
             } else {
                 if (Keyboard.getEventKey() == Keyboard.KEY_W) {
-                    keyDown[0] = false;
+                    keys ^= 1;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_A) {
-                    keyDown[1] = false;
+                    keys ^= 2;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_S) {
-                    keyDown[2] = false;
+                    keys ^= 4;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_D) {
-                    keyDown[3] = false;
+                    keys ^= 8;
+                } else if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
+                    shoot = true;
+                } else if (Keyboard.getEventKey() == Keyboard.KEY_LSHIFT) {
+                    spd = 2;
                 }
             }
         }
 
-        if (!keyDown[0] && !keyDown[2]) this.setVelY(0);
-        if (!keyDown[1] && !keyDown[3]) this.setVelX(0);
+        byte Hspd = 0, Vspd = 0;
 
-        x += velX;
-        y += velY;
+        if ((keys & 1) > 0) {
+            dy--;
+            Vspd -= spd;
+        }
+        if ((keys & 2) > 0) {
+            dx--;
+            Hspd -= spd;
+        }
+        if ((keys & 4) > 0) {
+            dy++;
+            Vspd += spd;
+        }
+        if ((keys & 8) > 0) {
+            dx++;
+            Hspd += spd;
+        }
+
+        if (dx == -1 && dy == 0) {
+            angle = 270;
+        } else if (dx == -1 && dy == -1) {
+            angle = 315;
+        } else if (dx == 0 && dy == -1) {
+            angle = 0;
+        } else if (dx == 1 && dy == -1) {
+            angle = 45;
+        } else if (dx == 1 && dy == 0) {
+            angle = 90;
+        } else if (dx == 1 && dy == 1) {
+            angle = 135;
+        } else if (dx == 0 && dy == 1) {
+            angle = 180;
+        } else if (dx == -1 && dy == 1) {
+            angle = 225;
+        }
+
+        if (shoot) {
+            /*double dx = (25 * Math.cos(Math.toRadians(angle)) - (-7) * Math.sin(Math.toRadians(angle)));
+            double dy = (25 * Math.sin(Math.toRadians(angle)) + (-7) * Math.cos(Math.toRadians(angle)));*/
+            // Math problems
+
+            handler.addObject(new Bullet(x, y, angle));
+        }
+
+        if ((keys & 1) == 0 && (keys & 4) == 0) this.setVelY(0);
+        if ((keys & 2) == 0 && (keys & 8) == 0) this.setVelX(0);
+
+        x += Hspd;
+        y += Vspd;
     }
 }

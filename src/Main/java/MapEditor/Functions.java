@@ -96,7 +96,7 @@ public class Functions {
 
             for (int i = 0; i < handler.objects.size(); i++) {
                 Object obj = handler.objects.get(i);
-                writer.println(obj.getX() + " " + obj.getY() + " " + obj.getType().toString().replace("class Game.Objects.", ""));
+                //writer.println(obj.getX() + " " + obj.getY() + " " + obj.getType().toString().replace("class Game.Objects.", ""));
             }
             writer.close();
         } catch (Exception e) {

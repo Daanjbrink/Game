@@ -5,7 +5,7 @@ import org.newdawn.slick.opengl.Texture;
 
 public abstract class Object {
 
-    protected int x, y, velX, velY, width, height, id;
+    protected int x, y, velX, velY, width, height, id, angle, scaleX = 1, scaleY = 1;
     protected Texture img;
 
     public abstract void render();
@@ -60,8 +60,20 @@ public abstract class Object {
         this.id = id;
     }
 
-    public Object getType() {
-        return this;
+    public int getAngle() {
+        return this.angle;
+    }
+
+    public int getScaleX() {
+        return this.scaleX;
+    }
+
+    public int getScaleY() {
+        return this.scaleY;
+    }
+
+    public Texture getImg() {
+        return img;
     }
 
     public boolean isClicked() {

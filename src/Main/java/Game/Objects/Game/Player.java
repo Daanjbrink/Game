@@ -9,12 +9,14 @@ import org.lwjgl.input.Keyboard;
 public class Player extends Object {
 
     private final String imgLoc = "Characters/Character 1/Character 1 phase 1.png";
-    //private final String imgLoc = "Wall/Wall 1.png";
 
     private byte keys;
     private int spd = 2;
 
     private int dx, dy;
+
+    // seconds * fps
+    private float MaxStamina = 5 * 60, stamina = MaxStamina;
 
     private ObjectHandler handler;
 
@@ -59,7 +61,7 @@ public class Player extends Object {
                     keys ^= 8;
                     dx++;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_LSHIFT) {
-                    spd = 5;
+                    keys ^= 16;
                 }
             } else {
                 if (Keyboard.getEventKey() == Keyboard.KEY_W) {
@@ -73,10 +75,27 @@ public class Player extends Object {
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_SPACE) {
                     shoot = true;
                 } else if (Keyboard.getEventKey() == Keyboard.KEY_LSHIFT) {
+                    keys ^= 16;
                     spd = 2;
                 }
             }
         }
+
+        if ((keys & 16) > 0) {
+            if (stamina > 0) {
+                stamina--;
+                spd = 5;
+            } else {
+                spd = 2;
+            }
+        } else if ((keys & 16) == 0) {
+            if (stamina < MaxStamina) {
+                stamina += .5;
+            }
+        }
+
+        System.out.println((keys & 16));
+        System.out.println("Stamina: " + stamina);
 
         byte Hspd = 0, Vspd = 0;
 

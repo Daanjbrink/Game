@@ -3,6 +3,7 @@ package Game.Objects.Game;
 import Game.Engine.Object;
 import Game.Engine.Vars;
 import Game.Utils.Draw;
+import org.lwjgl.util.Rectangle;
 
 public class Bullet extends Object {
 
@@ -53,7 +54,26 @@ public class Bullet extends Object {
     }
 
     public void update() {
+        if (collision(velX, velY)) {
+            Vars.handler.removeObject(this);
+        }
+
         x += velX;
         y += velY;
+    }
+
+    private boolean collision(int x1, int y1) {
+        Rectangle NewRec = new Rectangle(x + x1, y + y1, width, height);
+
+        for (int i = 0; i < Vars.handler.objects.size(); i++) {
+            Object obj = Vars.handler.objects.get(i);
+            System.out.println(obj.getClass().getSimpleName());
+            if (obj != this || !obj.getClass().getSimpleName().equals("Player")) {
+                if (NewRec.intersects(obj.getBounds())) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

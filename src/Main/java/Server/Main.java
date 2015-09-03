@@ -24,7 +24,7 @@ public class Main {
             System.exit(0);
         }
 
-        new Thread(new Receiver(socket)).start();
+        new Packets(socket);
     }
 
     public static void main(String[] args) {

@@ -1,6 +1,7 @@
 package Game.Engine;
 
 import org.lwjgl.input.Mouse;
+import org.lwjgl.util.Rectangle;
 import org.newdawn.slick.opengl.Texture;
 
 public abstract class Object {
@@ -74,6 +75,10 @@ public abstract class Object {
 
     public Texture getImg() {
         return img;
+    }
+
+    public Rectangle getBounds() {
+        return new Rectangle(this.x, this.y, this.width, this.height);
     }
 
     public boolean isClicked() {

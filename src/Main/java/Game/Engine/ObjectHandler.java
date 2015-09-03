@@ -9,4 +9,8 @@ public class ObjectHandler {
     public void addObject(Object object) {
         objects.add(object);
     }
+
+    public void removeObject(Object object) {
+        objects.remove(object);
+    }
 }

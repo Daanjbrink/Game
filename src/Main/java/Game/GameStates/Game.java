@@ -1,14 +1,15 @@
 package Game.GameStates;
 
 import Game.Engine.Loader;
-import Game.Engine.ObjectHandler;
 import Game.Engine.Vars;
-import Game.Objects.Game.Player;
+import Game.Utils.Connection;
 import Game.Utils.Draw;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.opengl.Texture;
+
+import java.net.DatagramSocket;
 
 public class Game extends GameState {
 
@@ -18,14 +19,13 @@ public class Game extends GameState {
             "Other/Bullet.png",
             "Wall/Wall 1.png"
     };
-    private int camX = 0, camY = 0;
-    private ObjectHandler handler;
 
     private Texture background;
 
-    public Game() {
-        this.handler = new ObjectHandler();
-    }
+
+    private int camX = 0, camY = 0;
+
+    private DatagramSocket server;
 
     public void init() {
         try {
@@ -36,11 +36,15 @@ public class Game extends GameState {
         }
 
         Loader.loadSprites(assets);
-
         background = Vars.manager.get("Text/Ground.png");
 
-        // Add objects
-        handler.addObject(new Player(32, 32, handler));
+        server = Connection.initConnection("192.168.1.100", 501);
+        if (server == null)
+            System.exit(0);
+    }
+
+    private void addObjects() {
+
     }
 
     public void render() {
@@ -48,16 +52,18 @@ public class Game extends GameState {
         GL11.glTranslatef(-camX, -camY, 0);
 
         Draw.DrawBackGround(0, 0, background, false);
-        for (int i = 0; i < handler.objects.size(); i++) {
-            handler.objects.get(i).render();
-        }
+        /*for (int i = 0; i < Vars.handler.objects.size(); i++) {
+            Vars.handler.objects.get(i).render();
+        }*/
 
         GL11.glPopMatrix();
     }
 
     public void update() {
-        for (int i = 0; i < handler.objects.size(); i++) {
-            handler.objects.get(i).update();
-        }
+        Connection.Receive(server);
+
+        /*for (int i = 0; i < Vars.handler.objects.size(); i++) {
+            Vars.handler.objects.get(i).update();
+        }*/
     }
 }

@@ -15,4 +15,6 @@ public class Vars {
     public static Main main;
     public static AssetManager manager;
 
+    public static ObjectHandler handler;
+
 }

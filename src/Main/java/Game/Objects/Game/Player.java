@@ -1,10 +1,10 @@
 package Game.Objects.Game;
 
 import Game.Engine.Object;
-import Game.Engine.ObjectHandler;
 import Game.Engine.Vars;
 import Game.Utils.Draw;
 import org.lwjgl.input.Keyboard;
+import org.lwjgl.util.Rectangle;
 
 public class Player extends Object {
 
@@ -18,11 +18,7 @@ public class Player extends Object {
     // seconds * fps
     private float MaxStamina = 5 * 60, stamina = MaxStamina;
 
-    private ObjectHandler handler;
-
-    public Player(int x, int y, ObjectHandler handler) {
-
-        this.handler = handler;
+    public Player(int x, int y) {
 
         this.x = x;
         this.y = y;
@@ -94,8 +90,13 @@ public class Player extends Object {
             }
         }
 
-        System.out.println((keys & 16));
-        System.out.println("Stamina: " + stamina);
+        if (shoot) {
+            /*double dx = (25 * Math.cos(Math.toRadians(angle)) - (-7) * Math.sin(Math.toRadians(angle)));
+            double dy = (25 * Math.sin(Math.toRadians(angle)) + (-7) * Math.cos(Math.toRadians(angle)));*/
+            // Math problems
+
+            Vars.handler.addObject(new Bullet(x, y, angle));
+        }
 
         byte Hspd = 0, Vspd = 0;
 
@@ -134,18 +135,31 @@ public class Player extends Object {
             angle = 225;
         }
 
-        if (shoot) {
-            /*double dx = (25 * Math.cos(Math.toRadians(angle)) - (-7) * Math.sin(Math.toRadians(angle)));
-            double dy = (25 * Math.sin(Math.toRadians(angle)) + (-7) * Math.cos(Math.toRadians(angle)));*/
-            // Math problems
-
-            handler.addObject(new Bullet(x, y, angle));
-        }
-
         if ((keys & 1) == 0 && (keys & 4) == 0) this.setVelY(0);
         if ((keys & 2) == 0 && (keys & 8) == 0) this.setVelX(0);
 
-        x += Hspd;
-        y += Vspd;
+        if (!collision(Hspd, 0)) {
+            x += Hspd;
+        }
+
+        if (!collision(0, Vspd)) {
+            y += Vspd;
+        }
+    }
+
+    private boolean collision(int x1, int y1) {
+        Rectangle NewRec = new Rectangle(x + x1, y + y1, width, height);
+
+        for (int i = 0; i < Vars.handler.objects.size(); i++) {
+            Object obj = Vars.handler.objects.get(i);
+
+            if (obj != this) {
+                if (NewRec.intersects(obj.getBounds())) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
     }
 }

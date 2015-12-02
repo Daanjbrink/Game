@@ -66,10 +66,15 @@ public class Draw {
     public static void DrawObject(Object object) {
         GL11.glPushMatrix();
 
-        GL11.glTranslatef(object.getX() + object.getWidth() / 2, object.getY() + object.getHeight() / 2, 0);
+        /*GL11.glTranslatef(object.getX() + object.getWidth() / 2, object.getY() + object.getHeight() / 2, 0);
         GL11.glRotatef(object.getAngle(), 0, 0, 1);
         GL11.glScalef(object.getScaleX(), object.getScaleY(), 0);
-        GL11.glTranslatef(-object.getX() - object.getWidth() / 2, -object.getY() - object.getHeight() / 2, 0);
+        GL11.glTranslatef(-object.getX() - object.getWidth() / 2, -object.getY() - object.getHeight() / 2, 0);*/
+
+        GL11.glTranslatef(object.getX(), object.getY(), 0);
+        GL11.glRotatef(object.getAngle(), 0, 0, 1);
+        GL11.glScalef(object.getScaleX(), object.getScaleY(), 0);
+        GL11.glTranslatef(-object.getX(), -object.getY(), 0);
 
         object.getImg().bind();
         GL11.glBegin(GL11.GL_QUADS);

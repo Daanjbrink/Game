@@ -13,7 +13,7 @@ public class Connection {
 
             InetAddress IP = InetAddress.getByName(ip);
 
-            ByteBuffer buffer = ByteBuffer.allocate(4);
+            ByteBuffer buffer = ByteBuffer.allocate(30);
             buffer.put((byte) 0);
             buffer.flip();
             byte[] bb = new byte[buffer.remaining()];

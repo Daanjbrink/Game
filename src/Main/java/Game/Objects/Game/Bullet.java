@@ -9,7 +9,7 @@ public class Bullet extends Object {
 
     private final String imgLoc = "Other/Bullet.png";
 
-    private int spd = 20;
+    private int spd = 0;
 
     public Bullet(int x, int y, int angle) {
 
@@ -55,7 +55,7 @@ public class Bullet extends Object {
 
     public void update() {
         if (collision(velX, velY)) {
-            Vars.handler.removeObject(this);
+            //Vars.handler.removeObject(this);
         }
 
         x += velX;
@@ -67,8 +67,7 @@ public class Bullet extends Object {
 
         for (int i = 0; i < Vars.handler.objects.size(); i++) {
             Object obj = Vars.handler.objects.get(i);
-            System.out.println(obj.getClass().getSimpleName());
-            if (obj != this || !obj.getClass().getSimpleName().equals("Player")) {
+            if (obj != this || obj.getClass() != Player.class) {
                 if (NewRec.intersects(obj.getBounds())) {
                     return true;
                 }

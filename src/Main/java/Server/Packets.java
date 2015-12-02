@@ -1,17 +1,22 @@
 package Server;
 
+import java.net.DatagramPacket;
 import java.net.DatagramSocket;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Packets {
 
-    ConcurrentLinkedQueue<byte[]> packets = new ConcurrentLinkedQueue<>();
-    private DatagramSocket socket;
-    private Receiver receiver = new Receiver(this, socket);
+    ConcurrentLinkedQueue<DatagramPacket> packets = new ConcurrentLinkedQueue<>();
+
+    DatagramSocket socket;
+
+    private Receiver receiver;
     private Handler handler = new Handler(this);
 
     public Packets(DatagramSocket socket) {
         this.socket = socket;
+
+        receiver = new Receiver(this, socket);
 
         new Thread(receiver).start();
     }
@@ -20,15 +25,15 @@ public class Packets {
         handler.ReadPacket();
     }
 
-    public void addPacket(byte[] data) {
-        packets.add(data);
+    public void addPacket(DatagramPacket packet) {
+        packets.add(packet);
     }
 
-    public byte[] getPacket() {
+    public DatagramPacket getPacket() {
         return getPacket(true);
     }
 
-    public byte[] getPacket(boolean remove) {
+    public DatagramPacket getPacket(boolean remove) {
         if (packets.size() == 0) {
             return null;
         }

@@ -31,7 +31,7 @@ public class Receiver implements Runnable {
             DatagramPacket recvPacket = new DatagramPacket(receiveBuffer, receiveBuffer.length);
             try {
                 socket.receive(recvPacket);
-                packets.addPacket(recvPacket.getData());
+                packets.addPacket(recvPacket);
                 packets.Received();
             } catch (IOException e) {
                 Log.log("Failed to receive UDP packet exception: " + e, LogLevel.ERROR);

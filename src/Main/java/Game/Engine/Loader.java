@@ -1,16 +1,8 @@
 package Game.Engine;
 
-import Game.GameStates.Menu;
-import Game.GameStates.Settings;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.opengl.Texture;
 
 public class Loader {
-
-    private Menu menu;
-    private Settings settings;
-
-    private Texture loadingTexture;
 
     public static void init() {
         initVideo();

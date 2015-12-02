@@ -9,6 +9,7 @@ import org.lwjgl.util.Rectangle;
 public class Player extends Object {
 
     private final String imgLoc = "Characters/Character 1/Character 1 phase 1.png";
+    //private final String imgLoc = "Other/testObject.png";
 
     private byte keys;
     private int spd = 2;
@@ -91,11 +92,11 @@ public class Player extends Object {
         }
 
         if (shoot) {
-            /*double dx = (25 * Math.cos(Math.toRadians(angle)) - (-7) * Math.sin(Math.toRadians(angle)));
-            double dy = (25 * Math.sin(Math.toRadians(angle)) + (-7) * Math.cos(Math.toRadians(angle)));*/
+            int dx = (int) (25 * Math.cos(Math.toRadians(angle)) - Math.sin(Math.toRadians(angle)));
+            int dy = (int) (25 * Math.sin(Math.toRadians(angle)) + Math.cos(Math.toRadians(angle)));
             // Math problems
 
-            Vars.handler.addObject(new Bullet(x, y, angle));
+            Vars.handler.addObject(new Bullet(x + dx, y + dy, angle));
         }
 
         byte Hspd = 0, Vspd = 0;
@@ -152,7 +153,6 @@ public class Player extends Object {
 
         for (int i = 0; i < Vars.handler.objects.size(); i++) {
             Object obj = Vars.handler.objects.get(i);
-
             if (obj != this) {
                 if (NewRec.intersects(obj.getBounds())) {
                     return true;
